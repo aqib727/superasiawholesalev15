@@ -1,0 +1,173 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_import_img_zip
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-12 10:55+0000\n"
+"PO-Revision-Date: 2020-10-12 10:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_import_img_zip
+#: model_terms:ir.ui.view,arch_db:sh_import_img_zip.sh_iiz_import_img_zip_wizard_form
+msgid "<i class=\"fa fa-download\"/> Zip file"
+msgstr "<i class=\"fa fa-download\"/>ملف مضغوط"
+
+#. module: sh_import_img_zip
+#: model_terms:ir.ui.view,arch_db:sh_import_img_zip.sh_iiz_import_img_zip_wizard_form
+msgid "<strong>Download Sample:</strong>"
+msgstr "<strong>نموذج التحميل:</strong>"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__product_by__barcode
+msgid "Barcode"
+msgstr "الرمز الشريطي"
+
+#. module: sh_import_img_zip
+#: model_terms:ir.ui.view,arch_db:sh_import_img_zip.sh_iiz_import_img_zip_wizard_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__create_uid
+msgid "Created by"
+msgstr "انشأ من قبل"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__create_date
+msgid "Created on"
+msgstr "تم إنشاؤها على"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__img_for__employee
+msgid "Employee"
+msgstr "موظف"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__employee_by
+msgid "Employee By"
+msgstr "موظف من قبل"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__id
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__employee_by__id
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__partner_by__id
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__product_by__id
+msgid "ID"
+msgstr "هوية شخصية"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__employee_by__identification_id
+msgid "Identification No"
+msgstr "رقم التعريف"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__img_for
+msgid "Images For"
+msgstr "صور لـ"
+
+#. module: sh_import_img_zip
+#: model_terms:ir.ui.view,arch_db:sh_import_img_zip.sh_iiz_import_img_zip_wizard_form
+msgid "Import"
+msgstr "استيراد"
+
+#. module: sh_import_img_zip
+#: model_terms:ir.ui.view,arch_db:sh_import_img_zip.sh_iiz_import_img_zip_wizard_form
+msgid "Import Image Form Zip File"
+msgstr "استيراد نموذج صورة ملف مضغوط"
+
+#. module: sh_import_img_zip
+#: model:ir.actions.act_window,name:sh_import_img_zip.sh_iiz_import_img_zip_action
+#: model:res.groups,name:sh_import_img_zip.sh_iiz_import_img_zip_group
+msgid "Import Images From Zip File"
+msgstr "استيراد الصور من ملف مضغوط"
+
+#. module: sh_import_img_zip
+#: model:ir.ui.menu,name:sh_import_img_zip.sh_iiz_import_img_zip_menuitem
+msgid "Import Images from Zip File"
+msgstr "استيراد الصور من ملف مضغوط"
+
+#. module: sh_import_img_zip
+#: model:ir.model,name:sh_import_img_zip.model_sh_iiz_import_img_zip_wizard
+msgid "Import Images from zip file"
+msgstr "استيراد الصور من ملف مضغوط"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__partner_by__ref
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__product_by__default_code
+msgid "Internal Reference"
+msgstr "المرجع الداخلي"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard____last_update
+msgid "Last Modified on"
+msgstr "تاريخ آخر تعديل"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__employee_by__name
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__partner_by__name
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__product_by__name
+msgid "Name"
+msgstr "اسم"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__img_for__partner
+msgid "Partner"
+msgstr "شريك"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__partner_by
+msgid "Partner By"
+msgstr "شريك بقلم"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__img_for__product
+msgid "Product"
+msgstr "المنتج"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__product_by
+msgid "Product By"
+msgstr "المنتج من قبل"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__product_model
+msgid "Product Model"
+msgstr "موديل المنتج"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__product_model__pro_tmpl
+msgid "Product Template"
+msgstr "نموذج المنتج"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields.selection,name:sh_import_img_zip.selection__sh_iiz_import_img_zip_wizard__product_model__pro_var
+msgid "Product Variants"
+msgstr "متغيرات المنتج"
+
+#. module: sh_import_img_zip
+#: model:ir.model.fields,field_description:sh_import_img_zip.field_sh_iiz_import_img_zip_wizard__zip_file
+msgid "Zip File"
+msgstr "ملف مضغوط"
