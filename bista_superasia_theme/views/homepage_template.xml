@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="superaisa_homepage_template" name="Superasia Homepage">
+        <!-- Pixel -->
+        <noscript>
+            <img height="1" width="1" src="https://www.facebook.com/tr?id=258072215515359&amp;ev=PageView
+        &amp;noscript=1" />
+        </noscript>
+
+        <div id="wrap" class="oe_structure oe_empty">
+            <section id="hero">
+                <div class="hero-container">
+                    <div class="carousel-item active home_banner" style="background: url(&quot;/bista_superasia_theme/static/src/img/slide/superasia.png&quot;)no-repeat center center;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;height:80vh;">
+                        <div class="op" style="padding: 20px;background: rgba(0, 0, 0, 0.4);color: #fff;width: 100%;height: 100%;">
+                            <div class="carousel-container">
+                                <div class="carousel-content container text-left">
+                                    <div class="row">
+                                        <div class="head_banner_text col-md-6">
+                                            <h4 id="superasia_heading" class="banner-heading-mali typing" style="font-family: 'Raleway', sans-serif;"></h4>
+                                            <hr style="height: 3px;color: #ac1520;width: 20%;opacity: inherit;" />
+                                        </div>
+                                        <div class="col-md-9"></div>
+                                        <div class="head_banner_text_2 col-md-6">
+                                            <h5 id="superasia_heading2" class="banner-subheading-mali ">Super Asia Foods &amp; Spices is a wholesale company of quality and trusted products located in Toronto Canada.</h5>
+                                        </div>
+                                    </div> <!-- row -->
+
+                                </div> <!-- carousel-content -->
+                            </div> <!-- carousel-container -->
+                        </div>
+                    </div> <!-- carousel-item -->
+                </div>
+            </section> <!-- End Hero -->
+            <main id="main" t-att-class="'mt-n6' if request.env.user.id == request.env.ref('base.public_user').id or request.env.user.has_group('base.user_admin') else False">
+                <t t-if="request.env.user.has_group('base.user_admin') or request.env.user.id == request.env.ref('base.public_user').id">
+                    <!-- ======= About Us Section ======= -->
+                    <section id="about" class="about mt-4">
+                        <div class="container">
+                            <div class="row no-gutters">
+                                <div class="col-lg-6">
+                                    <div class="retailer-login-box">
+                                        <a href="/b2b_activation" class="btn" role="button" aria-pressed="true" style="  background-color: #ac1520;color: white;font-weight: bolder;">Retailer Login</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="consumer-login-box mr-0">
+                                        <a href="/b2cactivation" class="btn" role="button" aria-pressed="true" style="  background-color: #ac1520;color: white;font-weight: bolder;">Direct Consumer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section> <!-- End About Us Section -->
+
+                    <!-- ======= Services Section ======= -->
+                    <section id="services" class="section-bg-new">
+                        <div class="fluid-container">
+                            <!--                                    <div class="row no-gutters" style="height: 35vh;">-->
+                            <!--                                        <div class="col-lg-7 col-md-7 text-center">-->
+
+                            <!--                                            <video class="" src="/bista_superasia_theme/static/src/img/videoplayback.mp4" autoplay="1" loop="1" playsinline="1" muted="1"></video>-->
+
+                            <!--                                        </div>-->
+                            <!--                                        <div class="col-lg-5 col-md-5 pl-5 responsive-vision-statement">-->
+                            <!--                                            <div class="p-lg-5 p-md-3 section-title text-left w-75 vision_content">-->
+                            <!--                                                <h1 class="vision-font-head">Vision Statement</h1><hr/>-->
+                            <!--                                                <p class="text-white vision-font">Super Asia Foods &amp; Spices is a wholesale company of quality and trusted products located in Toronto Canada.</p>-->
+                            <!--                                            </div>-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <div class="row no-gutters">
+                                <div class="col-lg-6">
+                                    <video class="" src="/bista_superasia_theme/static/src/img/videoplayback.mp4" autoplay="1" loop="1" playsinline="1" muted="1"></video>
+                                </div>
+
+
+                                <div class="col-lg-6 pl-5 responsive-vision-statement" style="height: 35.1vh;background: url('/bista_superasia_theme/static/src/img/Web_SAF.png') no-repeat;    background-repeat: no-repeat;background-size: 100%;background-position: center;">
+                                    <div class="p-lg-5 p-md-3 section-title text-left w-75 vision_content">
+                                        <h1 class="vision-font-head aos-animate aos-init" data-aos="fade-up">Vision Statement</h1>
+                                        <hr />
+                                        <p class="text-white vision-font" data-aos="fade-left">Super Asia Foods &amp; Spices is a wholesale company of quality and trusted products located in Toronto Canada.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section> <!-- End Services Section -->
+                    <!-- ======= How It Works Section ======= -->
+                    <section id="how_it_works" class="section-bg-how-it-works">
+                        <div class="container">
+                            <div class="row no-gutters">
+                                <div class="col-lg-12">
+                                    <div class="section-how-it-works-title text-center pb-5">
+                                        <h1 class="text-uppercase h1_replace" data-aos="fade-right">How It Works? </h1>
+                                        <p class="" data-aos="fade-left">We ensure customers have maximum visibility, every step of the way</p>
+                                    </div>
+                                    <div class="howItWork-content-wrap">
+                                        <div class="howItWork-content d-xl-flex align-items-center justify-content-center">
+                                            <div class="col-sm-2 howItWork-block-col aos-init aos-animate" data-aos="animateArrow">
+
+                                                <!-- first-arrow-disable -->
+                                                <div class="arrow-box">
+                                                    <svg width="84px" height="33px" viewBox="0 0 84 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+                                                        <title>arrow</title>
+                                                        <desc>Created with Sketch.</desc>
+                                                        <g id="Backup" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <g id="Artboard" transform="translate(-453.000000, -501.000000)" stroke="#AC1520">
+                                                                <g id="arrow" transform="translate(454.444064, 502.000000)">
+                                                                    <path d="M77.8561323,28.8527447 C72.8530349,12.1623928 57.3748249,8.17124146e-14 39.0559359,8.17124146e-14 C20.4128518,8.17124146e-14 4.71188117,12.5966853 -1.59872116e-12,29.7430801" id="Oval" stroke-dasharray="3,3"></path>
+                                                                    <polyline id="Path-8" points="72.2842074 27.1877441 78.2793166 31.1936559 82.0469027 25.0847168"></polyline>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </div> <!-- end first-arrow-box -->
+                                                <div class="howItWork-block aos-init aos-animate" data-aos="zoom-in">
+                                                    <div class="howItWork-block-inr">
+                                                        <div class="icon-holder">
+                                                            <img alt="signup" width="35" data-src="/bista_superasia_theme/static/src/img/free-signup.png" class="mb-3" src="/bista_superasia_theme/static/src/img/free-signup.png" />
+                                                            <noscript>
+                                                                <img src="/bista_superasia_theme/static/src/img/free-signup.png" alt="Free Signup" width="35" />
+                                                            </noscript>
+                                                        </div>
+                                                        <h4 class="headingText mb-1">Free Sign up</h4>
+                                                        <p>Add your shipping information</p>
+                                                    </div>
+                                                </div> <!-- end howItWork-block -->
+                                            </div> <!-- end col-sm-2 howItWork-block-col -->
+                                            <div class="col-sm-2 howItWork-block-col aos-init aos-animate" data-aos="animateArrow">
+                                                <!-- first-arrow-disable -->
+                                                <div class="arrow-box">
+                                                    <svg width="84px" height="33px" viewBox="0 0 84 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+                                                        <title>arrow</title>
+                                                        <desc>Created with Sketch.</desc>
+                                                        <g id="Backup" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <g id="Artboard" transform="translate(-453.000000, -501.000000)" stroke="#AC1520">
+                                                                <g id="arrow" transform="translate(454.444064, 502.000000)">
+                                                                    <path d="M77.8561323,28.8527447 C72.8530349,12.1623928 57.3748249,8.17124146e-14 39.0559359,8.17124146e-14 C20.4128518,8.17124146e-14 4.71188117,12.5966853 -1.59872116e-12,29.7430801" id="Oval" stroke-dasharray="3,3"></path>
+                                                                    <polyline id="Path-8" points="72.2842074 27.1877441 78.2793166 31.1936559 82.0469027 25.0847168"></polyline>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </div> <!-- end first-arrow-box -->
+                                                <div class="howItWork-block aos-init aos-animate" data-aos="zoom-in">
+                                                    <div class="howItWork-block-inr">
+                                                        <div class="icon-holder">
+                                                            <img alt="signup" width="35" data-src="/bista_superasia_theme/static/src/img/instant-quotes.png" class="mb-3" src="/bista_superasia_theme/static/src/img/instant-quotes.png" />
+                                                            <noscript>
+                                                                <img src="/bista_superasia_theme/static/src/img/instant-quotes.png" alt="Instant Quotes" width="35" />
+                                                            </noscript>
+                                                        </div>
+                                                        <h4 class="headingText mb-1">Instant Quotes</h4>
+                                                        <p>Compare rates from multiple carriers in one page</p>
+                                                    </div>
+                                                </div> <!-- end howItWork-block -->
+                                            </div> <!-- end col-sm-2 howItWork-block-col -->
+                                            <div class="col-sm-2 howItWork-block-col aos-init aos-animate" data-aos="animateArrow">
+                                                <!-- first-arrow-disable -->
+                                                <div class="arrow-box">
+                                                    <svg width="84px" height="33px" viewBox="0 0 84 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+                                                        <title>arrow</title>
+                                                        <desc>Created with Sketch.</desc>
+                                                        <g id="Backup" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <g id="Artboard" transform="translate(-453.000000, -501.000000)" stroke="#AC1520">
+                                                                <g id="arrow" transform="translate(454.444064, 502.000000)">
+                                                                    <path d="M77.8561323,28.8527447 C72.8530349,12.1623928 57.3748249,8.17124146e-14 39.0559359,8.17124146e-14 C20.4128518,8.17124146e-14 4.71188117,12.5966853 -1.59872116e-12,29.7430801" id="Oval" stroke-dasharray="3,3"></path>
+                                                                    <polyline id="Path-8" points="72.2842074 27.1877441 78.2793166 31.1936559 82.0469027 25.0847168"></polyline>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </div> <!-- end first-arrow-box -->
+                                                <div class="howItWork-block aos-init aos-animate" data-aos="zoom-in">
+                                                    <div class="howItWork-block-inr">
+                                                        <div class="icon-holder">
+                                                            <img alt="signup" width="35" data-src="/bista_superasia_theme/static/src/img/print-labels.png" class="mb-3" src="/bista_superasia_theme/static/src/img/print-labels.png" />
+                                                            <noscript>
+                                                                <img src="/bista_superasia_theme/static/src/img/print-labels.png" alt="Print Labels" width="35" />
+                                                            </noscript>
+                                                        </div>
+                                                        <h4 class="headingText mb-1">Print Labels</h4>
+                                                        <p>Print and stick the shipping label on your
+                                                        package</p>
+                                                    </div>
+                                                </div> <!-- end howItWork-block -->
+                                            </div> <!-- end col-sm-2 howItWork-block-col -->
+                                            <div class="col-sm-2 howItWork-block-col aos-init aos-animate" data-aos="animateArrow">
+                                                <!-- first-arrow-disable -->
+                                                <div class="arrow-box">
+                                                    <svg width="84px" height="33px" viewBox="0 0 84 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+                                                        <title>arrow</title>
+                                                        <desc>Created with Sketch.</desc>
+                                                        <g id="Backup" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <g id="Artboard" transform="translate(-453.000000, -501.000000)" stroke="#AC1520">
+                                                                <g id="arrow" transform="translate(454.444064, 502.000000)">
+                                                                    <path d="M77.8561323,28.8527447 C72.8530349,12.1623928 57.3748249,8.17124146e-14 39.0559359,8.17124146e-14 C20.4128518,8.17124146e-14 4.71188117,12.5966853 -1.59872116e-12,29.7430801" id="Oval" stroke-dasharray="3,3"></path>
+                                                                    <polyline id="Path-8" points="72.2842074 27.1877441 78.2793166 31.1936559 82.0469027 25.0847168"></polyline>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </div> <!-- end first-arrow-box -->
+                                                <div class="howItWork-block aos-init aos-animate" data-aos="zoom-in">
+                                                    <div class="howItWork-block-inr">
+                                                        <div class="icon-holder">
+                                                            <img alt="signup" width="35" data-src="/bista_superasia_theme/static/src/img/ship.png" class="mb-3" src="/bista_superasia_theme/static/src/img/ship.png" />
+                                                            <noscript>
+                                                                <img src="/bista_superasia_theme/static/src/img/ship.png" alt="Ship" width="35" />
+                                                            </noscript>
+                                                        </div>
+                                                        <h4 class="headingText mb-1">Ship</h4>
+                                                        <p>Schedule a free pickup &amp; the carrier will pick it form your location</p>
+                                                    </div>
+                                                </div> <!-- end howItWork-block -->
+                                            </div> <!-- end col-sm-2 howItWork-block-col -->
+                                            <div class="col-sm-2 howItWork-block-col aos-init aos-animate" data-aos="animateArrow">
+                                                <!-- first-arrow-disable -->
+                                                <div class="arrow-box">
+                                                    <svg width="84px" height="33px" viewBox="0 0 84 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+                                                        <title>arrow</title>
+                                                        <desc>Created with Sketch.</desc>
+                                                        <g id="Backup" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <g id="Artboard" transform="translate(-453.000000, -501.000000)" stroke="#AC1520">
+                                                                <g id="arrow" transform="translate(454.444064, 502.000000)">
+                                                                    <path d="M77.8561323,28.8527447 C72.8530349,12.1623928 57.3748249,8.17124146e-14 39.0559359,8.17124146e-14 C20.4128518,8.17124146e-14 4.71188117,12.5966853 -1.59872116e-12,29.7430801" id="Oval" stroke-dasharray="3,3"></path>
+                                                                    <polyline id="Path-8" points="72.2842074 27.1877441 78.2793166 31.1936559 82.0469027 25.0847168"></polyline>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </div> <!-- end first-arrow-box -->
+                                                <div class="howItWork-block aos-init aos-animate" data-aos="zoom-in">
+                                                    <div class="howItWork-block-inr">
+                                                        <div class="icon-holder">
+                                                            <img alt="signup" width="35" data-src="/bista_superasia_theme/static/src/img/track-trace.png" class="mb-3" src="/bista_superasia_theme/static/src/img/track-trace.png" />
+                                                            <noscript>
+                                                                <img src="/bista_superasia_theme/static/src/img/track-trace.png" alt="Track Trace" width="35" />
+                                                            </noscript>
+                                                        </div>
+                                                        <h4 class="headingText mb-1">Track &amp; Trace</h4>
+                                                        <p>Track package and get shipping updates in one click</p>
+                                                    </div>
+                                                </div> <!-- end howItWork-block -->
+                                            </div> <!-- end col-sm-2 howItWork-block-col -->
+                                            <div class="col-sm-2 howItWork-block-col aos-init aos-animate" data-aos="animateArrow">
+                                                <!-- first-arrow-disable -->
+                                                <div class="arrow-box">
+                                                    <svg width="84px" height="33px" viewBox="0 0 84 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+                                                        <title>arrow</title>
+                                                        <desc>Created with Sketch.</desc>
+                                                        <g id="Backup" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <g id="Artboard" transform="translate(-453.000000, -501.000000)" stroke="#AC1520">
+                                                                <g id="arrow" transform="translate(454.444064, 502.000000)">
+                                                                    <path d="M77.8561323,28.8527447 C72.8530349,12.1623928 57.3748249,8.17124146e-14 39.0559359,8.17124146e-14 C20.4128518,8.17124146e-14 4.71188117,12.5966853 -1.59872116e-12,29.7430801" id="Oval" stroke-dasharray="3,3"></path>
+                                                                    <polyline id="Path-8" points="72.2842074 27.1877441 78.2793166 31.1936559 82.0469027 25.0847168"></polyline>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </div> <!-- end first-arrow-box -->
+                                                <div class="howItWork-block aos-init aos-animate" data-aos="zoom-in">
+                                                    <div class="howItWork-block-inr">
+                                                        <div class="icon-holder">
+                                                            <img alt="signup" width="35" data-src="/bista_superasia_theme/static/src/img/one-invoice.png" class="mb-3" src="/bista_superasia_theme/static/src/img/one-invoice.png" />
+                                                            <noscript>
+                                                                <img src="/bista_superasia_theme/static/src/img/one-invoice.png" alt="One Invoice" width="35" />
+                                                            </noscript>
+                                                        </div>
+                                                        <h4 class="headingText mb-1">One Invoice</h4>
+                                                        <p>Find all your shipping charges on a single invoice</p>
+                                                    </div>
+                                                </div> <!-- end howItWork-block -->
+                                            </div> <!-- end col-sm-2 howItWork-block-col -->
+                                        </div> <!-- howItWork-content -->
+                                    </div> <!-- howItWork-content-wrap -->
+                                </div> <!-- col-lg-12 -->
+                            </div> <!-- row no-gutters -->
+                        </div> <!-- container -->
+                    </section> <!-- End Services Section -->
+
+                    <!-- ======= Bussiness Section Start ======= -->
+                    <section class="company_achievement" style="background: #F5F5F5;">
+                        <div class="c-no container-fluid pb-4 pt-4" style="background: #ac1520;">
+                            <div class="container-fluid">
+                                <h1 class="row text-uppercase" id="counter">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="aos-animate aos-init col-sm-12 text-center" data-aos="fade-up">
+                                                <h1 class="pb-3 h1_replace text-uppercase" style="font-family: 'Raleway', sans-serif;color:white !important"> Super Asia Foods Canada's premium Ethnic Food Distributor</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid d-flex text-white" style="background-color:#ac1520">
+                                        <div class="col-sm-4 counter-Txt" style="border-right: solid;">
+                                            <span class="counter-value" data-count="15">0</span>
+                                            Years In Business
+                                            <br />
+                                            <span style="font-size:15px">(Serving canada since 1990’s)</span>
+                                        </div>
+                                        <div class="col-sm-4 counter-Txt pt-2">
+                                            <div class="d-flex justify-content-center pt-1">
+                                                <span style="font-size:25px" class="counter-value pt-3">Canada's premium Ethnic Food Distributor</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 counter-Txt pt-2" style="border-left: solid;">
+                                            <div class="d-flex justify-content-center">
+                                                <span class="counter-value" data-count="800">0</span>
+                                                <i class="fa fa-plus pl-1 pt-2" />
+                                            </div>
+                                            Serving B2B Store
+                                        </div>
+                                    </div>
+                                </h1>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- ======= Business Section End======= -->
+
+                    <!-- ======= Range Section ======= -->
+                    <section class="section-bg" style="background:#F5F5F5">
+                        <div class="container section-title">
+                            <h1 class="h1_replace" data-aos="flip-left">Our Range</h1>
+                            <div class="row">
+                                <div id="clients">
+                                    <div class="clients-wrap">
+                                        <ul id="clients-list" class="clearfix" style="width: 400% !important;">
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/1.png" alt="First State Bank" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/2.png" alt="Custom Aire" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/3.png" alt="First State Bank" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/4.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/5.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/6.png" alt="First State Bank" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/7.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/8.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/9.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/10.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/12.jpg" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/13.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/14.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/15.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/16.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/17.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/19.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/20.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/21.png" />
+                                            </li>
+                                            <li class="range-sliders">
+                                                <img src="/bista_superasia_theme/static/src/img/fwbrandlogos/23.png" />
+                                            </li>
+                                        </ul>
+                                    </div> <!-- @end .clients-wrap -->
+                                </div>
+                            </div>
+                        </div> <!-- End container -->
+                    </section> <!-- End Counts Section -->
+
+                    <!-- ======= Products Catalog Section ======= -->
+                    <section class="products-catalog">
+                        <div class="d-grid gap-2">
+                            <!-- <t t-esc="res_company.product_catalog.url"/> -->
+                            <!--                                    <a href="/bista_superasia_theme/static/src/Super_Asia_Cat_1.pdf"-->
+                            <a t-attf-href="/web/content/#{res_company.sudo().product_catalog.id}" class="btn custom_them_primary font-weight-bold text-white" style="font-size: 36px;
+letter-spacing: 0px;" target="_blank">
+                                <i class="far fa-file-pdf"></i>
+                                Click Here for The Product Catalog
+                            </a>
+                        </div>
+                    </section> <!-- End Counts Section -->
+                    <!-- End Clients Reviews Section -->
+                </t>
+                <t t-if="request.env.user.has_group('base.user_admin') or request.env.user.id != request.env.ref('base.public_user').id">
+
+                    <!-- ======= Our Partners Section ======= -->
+                    <section class="section-partners">
+                        <div class="container section-title">
+                            <h1 class="text-center text-uppercase testimonials-title h1_replace py-3 pb-5" data-aos="zoom-in">Our Partners</h1>
+                            <div class="row">
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/01.png" alt="kcb" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/02.png" alt="qursh-new" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/03.png" alt="soofee" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/04.png" alt="nestle" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/05.png" alt="vital" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/06.png" alt="tang-new" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/07.png" alt="tang-new" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/08.png" alt="tang-new" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/09.png" alt="tang-new" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/11.png" alt="tang-new" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/12.png" alt="tang-new" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/13.png" alt="tang-new" class="image-alignment" />
+                                </div>
+                                <div class="col-md-2 pb-3">
+                                    <img src="/bista_superasia_theme/static/src/img/Our_Patners/14.png" alt="tang-new" class="image-alignment" />
+                                </div>
+                            </div> <!-- end row -->
+                        </div> <!-- end container -->
+                    </section> <!-- End Clients Section -->
+
+                </t>
+
+                <!-- ======= Clients Reviews Section ======= -->
+
+                <section class="section-bg-clients">
+                    <div class="section-title">
+                        <h1 class="text-center text-uppercase testimonials-title h1_replace py-3" data-aos="zoom-in">What They Say</h1>
+                        <div class="row">
+                            <div class="col-lg-10 mx-auto">
+                                <div class="p-2 responsive-clients-section">
+                                    <!-- Bootstrap carousel-->
+                                    <div data-romw-token="Da4gxGxDWyHQmDJL47Jh016ns124Gvp9xmhYOhWLXrH7tNmFU2"></div>
+                                    <script src="https://reviewsonmywebsite.com/js/v2/embed.js?id=c338ae55b38e487f19ae" type="text/javascript"></script>
+                                </div> <!-- end p-5 -->
+                            </div> <!-- end col-lg-10 -->
+                        </div> <!-- end row -->
+                    </div> <!-- end container -->
+                </section>
+
+                <!-- End Clients Reviews Section -->
+
+
+            </main>
+
+
+        </div>
+
+    </template>
+    <record id="superasia_homepage_template_rec" model="ir.ui.view">
+        <field name="name">Home Page</field>
+        <field name="type">qweb</field>
+        <field name="key">website.homepage.custom</field>
+        <field name="arch" type="xml">
+            <t t-name="website.homepage">
+                <t t-call="website.layout">
+                    <t t-call="bista_superasia_theme.superaisa_homepage_template"/>
+                </t>
+            </t>
+        </field>
+    </record>
+    <record id="superasia_homepage_template_page" model="website.page">
+        <field name="website_published">True</field>
+        <field name="url">/superasia-home</field>
+        <field name="is_homepage">True</field>
+        <field name="view_id" ref="superasia_homepage_template_rec" />
+    </record>
+
+</odoo>

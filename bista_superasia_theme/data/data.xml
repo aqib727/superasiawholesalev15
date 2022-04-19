@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- NOTE: From wbesite_extensino -->
+    <data noupdate="1">
+        <!-- <record id="menu_brands" model="website.menu">
+            <field name="name">Brands</field>
+            <field name="url">/brands</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">25</field>
+        </record>
+
+        <record id="b2c_pricelist_auto_price_calc" model="ir.cron">
+            <field name="name">Auto Calculate B2C Pricelist's Pricing</field>
+            <field name="model_id" ref="product.model_product_pricelist"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.b2c_pricelist_price_calc()
+            </field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="interval_number">999</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="priority">1</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="prod_temp_b2c_pricelist_price_calc" model="ir.cron">
+            <field name="name">B2C Pricelist's Price in Product Template</field>
+            <field name="model_id" ref="product.model_product_pricelist"/>
+            <field name="state">code</field>
+            <field name="code">
+                model.prod_temp_b2c_pricelist_price_calc()
+            </field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="interval_number">999</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="priority">1</field>
+            <field name="active" eval="False"/>
+        </record> -->
+
+    </data>
+</odoo>

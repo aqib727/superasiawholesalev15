@@ -1,0 +1,62 @@
+<templates>
+
+<!--Product Searchbox on Header Start-->
+<!--    <t t-extend="website_sale.productsSearchBar.autocomplete">-->
+<!--        <t t-jquery="t[t-if='hasMoreProducts']:last" t-operation="replace">-->
+<!--            <form t-attf-class="o_wsale_products_searchbar_form o_wait_lazy_js #{_classes}" t-att-action="action if action else '/shop'" method="get">-->
+<!--                <input name="order" type="hidden" class="o_wsale_search_order_by" value=""/>-->
+<!--                <button type="submit" class="dropdown-item text-center text-primary bg-600">All results</button>-->
+<!--            </form>-->
+<!--        </t>-->
+<!--    </t>-->
+<!--Product Searchbox on Header End-->
+
+
+    4
+    <!-- Product Recent View in Website Form -->
+<t t-extend="website_sale.productsRecentlyViewed">
+    <t t-jquery="div.row" t-operation="attributes">
+        <attribute name="class" value="row w-100"/>
+    </t>
+    <t t-jquery="div.o_carousel_product_card_footer" t-operation="attributes">
+        <attribute name="class" value="o_carousel_product_card_footer card-footer d-flex align-items-center text-black"/>
+    </t>
+    <t t-jquery="button.js_add_cart" t-operation="replace">
+        <t t-if="product.avail_qty >= 1">
+            <button type="button" role="button" class="btn btn-primary js_add_cart ml-auto"
+                    title="Add to Cart">
+                <i class="fa fa-fw fa-shopping-cart"/>
+            </button>
+        </t>
+    </t>
+    <t t-jquery="div.o_carousel_product_card_body" t-operation="append">
+        <t t-if="product.is_user_admin_b2b">
+            <div>
+                <h6 class="product_uom"><t t-esc="product.product_uom"/></h6>
+            </div>
+        </t>
+    </t>
+    <t t-jquery="div.font-weight-bold" t-operation="after">
+        <t t-if="product.is_user_admin_b2b and product.b2b_old_price > 0.0 and product.b2b_old_price > product.list_price and product.list_price > 0.0">
+            <div class="d-block font-weight-bold text-decoration-line-through ml-1 text-danger" t-raw="product.b2b_old_price_html" />
+        </t>
+        <t t-if="product.is_user_public_b2c and product.b2c_old_price > 0.0 and product.b2c_old_price > product.b2c_pricelist_price and product.b2c_pricelist_price > 0.0">
+            <div class="d-block font-weight-bold text-decoration-line-through ml-1 text-danger" t-raw="product.b2c_old_price_html" />
+        </t>
+    </t>
+</t>
+    <!-- Product Recent View in Website Form -->
+
+    <!-- Product hide price & description_sale in shop page searchbox -->
+<t t-extend="website_sale.productsSearchBar.autocomplete">
+    <t t-jquery="div.flex-shrink-0" t-operation="attributes">
+        <attribute name="class" value="flex-shrink-0 d-none"/>
+    </t>
+    <t t-jquery="p.mb-0" t-operation="attributes">
+        <attribute name="class" value="mb-0 d-none"/>
+    </t>
+</t>
+    <!-- Product hide price in shop page searchbox -->
+
+
+</templates>

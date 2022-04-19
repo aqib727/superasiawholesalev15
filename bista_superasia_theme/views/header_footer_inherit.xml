@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="superasia_custom_header" inherit_id="website.layout"  name="SuperAsia Custom Header"  active="False">
+
+        <xpath expr="//div[@id='wrapwrap']/header" position="replace">
+            <!-- <t t-if="request.env.user.user_has_groups('base.group_public')">
+            
+                <div id="header_ticker" class="container-fluid px-0">
+                    <div style="font-weight: bold;font-size: 14px;padding: 5px;" class="custom_them_primary w-100 text-center">
+                        <span>We are currently closed for direct consumer online orders due to high demand, Please stay tuned for when shipping resumes.</span>
+                    </div>
+                </div>
+            </t> -->
+            <t t-if="request.env.user.id == request.env.ref('base.public_user').id">
+                <div class="left-fixed-sidebar row py-3 pl-0" style="z-index:999">
+                    <div class="col-12 col-3 order-2" id="sticky-sidebar">
+                        <div class="sticky-top">
+                            <div class="col-12 nav flex-column">
+                                <a t-att-href="'mailto:%s' % res_company.email" class="nav-link" data-toggle="tooltip" data-placement="right" title="" t-att-title="res_company.email"><i class="icofont-ui-message" style="font-size: 1.8rem;"></i></a>
+                                <a t-att-href="'mailto:%s' % res_company.phone" href="#_" class="nav-link" data-toggle="tooltip" data-placement="right" title="" t-att-title="res_company.phone"  style="font-size: 1.8rem;"><i class="icofont-phone"></i></a>
+                                <a href="/b2b_activation" class="nav-link retailer-login" data-toggle="tooltip" data-placement="right" title="" data-original-title="Retailer Login" style="white-space: normal !important">Retailer Login</a>
+                                <a t-att-href="res_company.google_map_link()" target="_BLANK" class="nav-link" data-toggle="tooltip" data-placement="right" title="" data-original-title="View Location"  style="font-size: 1.8rem;"><i class="icofont-google-map"></i></a>
+<!--                                            <a href="#_" class="nav-link" data-toggle="tooltip" data-placement="right" title="" data-original-title="Search"><i class="icofont-search-1"></i></a>-->
+                                <div class="nav-item hover-flag-dropdown open">
+                                    <a href="#" class="nav-link dropdown-toggle"><i class="ca flag"></i></a>
+                                    <div class="dropdown-menu-toggle">
+                                        <a href="#" class="dropdown-item"><i class="gb flag"></i></a>
+                                        <a href="#" class="dropdown-item"><i class="us flag"></i></a>
+
+                                    </div>
+                                </div><!-- hover-flag-dropdown -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+
+            <header id="header" t-attf-class="o_header_fixed #{'d-none' if hide_header else ''} ">
+                <script type="application/ld+json">
+                    {
+                    "@context" : "http://schema.org",
+                    "@type" : "Website",
+                    "name" : "Super Asia",
+                    "image" : "https://www.superasia.ca/assets/images/logo-3.png",
+                    "telephone" : "416-746-5550"
+                    }
+                </script>
+                
+
+                <link rel="canonical" href="https://www.superasia.ca"/>
+
+                <nav class="navbar h-100 ">
+                    <div class="col-md-12 col-sm-12 col-lg-12 mobile_ul" id="head_menu_div">
+                    <ul class="d-flex justify-content-center mt-n1">
+                        <li class="navbar-logo logo">
+                            <a href="/">
+                                <img t-att-src="'/logo.png?company=%s' % res_company.id" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+                            </a>
+                        </li>
+                        <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                            <t t-call="website.submenu">
+                                <t t-set="item_class" t-value="'nav-menus'" class="p-2"/>
+                                <t t-set="link_class" t-value="'nav-link'" class="p-2"/>
+                            </t>
+                        </t>
+                        <li class="navbar-links">
+                            <form method="get" action="/shop">
+                                <div t-attf-class="input-group #{_classes}" role="search">
+                                    <input type="text" name="search" class="search-query form-control oe_search_box" placeholder="Search..." t-att-value="search"/>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary oe_search_button" aria-label="Search" title="Search"><i class="fa fa-search"/></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <li class="navbar-links">
+                            <img src="/bista_superasia_theme/static/src/img/profile.png" class="menu_icon_right_panel mx-auto profile_icon" alt="profile"/>
+                            <a class="link-dark cart_link custom_nav_a" t-attf-href="/web/login" style="width: max-content !important;"
+                               groups="base.group_public">
+                                Sign in
+                            </a>
+                            <div class="dropdown">
+                                <a class="p-0 text-center custom_nav_a" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" t-ignore="true" t-if="not user_id._is_public()" style="white-space: normal;">
+                                    <t t-esc="user_id.name[:23] + '...' if user_id.name and len(user_id.name) &gt; 25 else user_id.name"/>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <!-- <a href="/my/home" role="menuitem" class="dropdown-item">My Account</a> -->
+                                    <a id="o_logout" class="dropdown-item-text"  style="padding: .25rem 1.5rem;" t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="navbar-links" t-if="not user_id._is_public()">
+                            <div class="adjust-icon text-center">
+                                <img src="/bista_superasia_theme/static/src/img/order.png" class="menu_icon_right_panel mx-auto profile_icon" alt="my order"/>
+                                <a class="p-0 text-left custom_nav_a" style="white-space:nowrap;" href="/my/home">My Order</a>
+                            </div>
+                        </li>
+                        <li class="navbar-links">
+                            <div class="text-center">
+                                <img src="/bista_superasia_theme/static/src/img/cart.png" class="menu_icon_right_panel profile_icon" alt="cart"/><br/>
+                                <t t-set="website_sale_order" t-value="website.sale_get_order()" />
+                                <t t-if ="website_sale_order and website_sale_order.cart_quantity">
+                                    <a href="/shop/cart" class="link-dark cart_link custom_nav_a">
+                                        Cart <sup style="font-size: calc(12px);position: initial;width: 2rem;border-radius: 0px;background: #BE222B;" t-attf-class="my_cart_quantity badge badge-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or ''" t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+                                    </a>
+                                </t>
+                                <t t-else="">
+                                    <a href="/shop/cart" class="link-dark cart_link custom_nav_a">Cart<sup style="font-size: calc(12px);position: initial;width: 2rem;border-radius: 0px;background: #BE222B;" t-attf-class="my_cart_quantity badge badge-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or ''" t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/></a>
+                                </t>
+                            </div>
+                        </li>
+                    </ul>
+                    </div>
+                </nav>
+                <div id="mobile_nav_section">
+                    <nav class="nav-menu" id="mob_nav">
+                        <ul>
+                            <li class="pb-2">
+                                <a href="/" class="logo">
+                                    <img t-att-src="'/logo.png?company=%s' % res_company.id" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+                                </a>
+                            </li>
+        
+        
+                            <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                <t t-if="submenu.name not in ['Brands','Contact us']" t-call="website.submenu">
+                                    <t t-set="item_class" t-value="'nav-item'" class="p-2"/>
+                                    <t t-set="link_class" t-value="'nav-link'" class="p-2"/>
+                                </t>
+                            </t>
+        
+        
+                            <!--Categories List slide -->
+                            <li class="border-right-0 ml-lg-4 responsive_dynamic_menu">
+                                <div class="adjust-icon col-12 dropright pl-3">
+                                    <a style="color:#e3f0fc;font-weight:500;padding:10px 5px !important "
+                                            class="custom_nav_a dropdown-toggle link-dark category_list_slide_link"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Categories
+                                </a>
+                                    <div class="dropdown-menu submenu_list_slide" style="left:-2 !important">
+                                        <t t-if="public_categories">
+                                            <div class="sticky_div"
+                                                 style="background:white; color:black; font-weight:bold; padding:10px 20px !important; font-size:large; position:sticky; top:0; z-index:1020;"><i class="far fa-arrow-alt-circle-left"/> Back
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                                            <a t-att-href="keep('/shop', category=0)"
+                                               t-attf-class="dropdown-item cate #{'' if current_category else 'active'} o_not_editable">All Products</a>
+                                            <t t-foreach="public_categories" t-as="c">
+                                                <a t-attf-class="dropdown-item cate #{'active' if c == current_category else ''}" t-att-href="keep('/shop/category/' + slug(c), category=0)">
+                                                <span t-field="c.name"/> </a>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="public_categories"
+                                               t-value="request.env['product.public.category'].sudo().search([])"/>
+                                            <div class="sticky_div"
+                                                 style="background:white; color:black; font-weight:bold; padding:10px 20px !important; font-size:large; position:sticky; top:0; z-index:1020;"><i class="far fa-arrow-alt-circle-left"/> Back
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                                            <a t-attf-class="dropdown-item cate o_not_editable" t-att-href="'/shop/'">All Products</a>
+                                            <t t-foreach="public_categories" t-as="c">
+        <!--                                            <a class="dropdown-item cate"-->
+        <!--                                               t-att-href="keep('/shop/category/' + slug(c), category=0)"><span t-field="c.name"/> </a>-->
+                                                <a t-attf-class="dropdown-item cate #{'' if c else 'active'} o_not_editable" t-att-href="'/shop/category/%s' % c.id"><span
+                                                        t-field="c.name"/> </a>
+                                            </t>
+                                        </t>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--Brands List slide-->
+                            <li class="border-right-0 ml-lg-4 responsive_dynamic_menu">
+                                <div class="adjust-icon col-12 dropright pl-3">
+                                    <a style="color:#e3f0fc;font-weight:500;padding:10px 5px !important"
+                                            class="custom_nav_a dropdown-toggle link-dark category_list_slide_link"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Brands
+                                </a>
+                                    <div class="dropdown-menu submenu_list_slide">
+                                        <t t-if="attributes">
+                                            <form class="js_attributes mb-2" method="get">
+                                                <input t-if="current_category" type="hidden" name="category" t-att-value="current_category.id" />
+                                                <input type="hidden" name="search" t-att-value="search" />
+                                                <div class="sticky_div"
+                                                     style="background:white; color:black; font-weight:bold; padding:10px 20px !important; font-size:large; position:sticky; top:0; z-index:1020;"><i class="far fa-arrow-alt-circle-left"/> Back
+                                                </div>
+                                            <div class="dropdown-divider"></div>
+                                                <t t-foreach="attributes" t-as="a">
+                                                    <t t-if="a.display_type == 'radio'">
+                                                        <t t-foreach="a.value_ids" t-as="v">
+                                                            <div class="form-check cate"
+                                                                 t-attf-class="form-check#{' active' if v.id in attrib_set else ''}" style="padding-left: 3rem !important;color: #e3f0fc !important;font-weight: 500;padding: 12px 48px !important;">
+                                                                <input type="checkbox" class="form-check-input cate"
+                                                                       name="attrib"
+                                                                       id="exampleCheck1" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None"/>
+                                                                <label class="form-check-label cate" style="font-weight: normal"
+                                                                       for="exampleCheck1" t-field="v.name"/>
+                                                            </div>
+                                                        </t>
+                                                    </t>
+                                                </t>
+        
+                                            </form>
+                                        </t>
+                                            <t t-else="">
+                                                <t t-set="attrib_set"
+                                                   t-value="request.httprequest.args.getlist('attrib')"/>
+                                                   <t t-set="attributes" t-value="request.env['product.attribute']
+        .sudo().search([])"/>
+                                                <form action="/shop" class="js_attributes mb-2" method="get">
+                                                <input t-if="category" type="hidden" name="category" t-att-value="category.id" />
+                                                <input type="hidden" name="search" t-att-value="search" />
+                                                    <div class="sticky_div"
+                                                         style="background:white; color:black; font-weight:bold; padding:10px 20px !important; font-size:large; position:sticky; top:0; z-index:1020;"><i class="far fa-arrow-alt-circle-left"/> Back
+                                                    </div>
+                                                <div class="dropdown-divider"></div>
+                                                <t t-if="attributes">
+                                                    <t t-foreach="attributes" t-as="a">
+                                                        <t t-if="a.display_type == 'radio'">
+                                                            <t t-foreach="a.value_ids" t-as="v">
+                                                                <div class="form-check cate"
+                                                                     t-attf-class="form-check#{' active' if v.id in attrib_set else ''}" style="padding-left: 3rem !important;color: #e3f0fc !important;font-weight: 500;padding: 12px 48px !important;">
+                                                                    <input type="checkbox" class="form-check-input cate"
+                                                                           name="attrib"
+                                                                           id="exampleCheck1" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None"/>
+                                                                    <label class="form-check-label cate"
+                                                                           style="font-weight: normal"
+                                                                           for="exampleCheck1" t-field="v.name"/>
+                                                                </div>
+                                                            </t>
+                                                        </t>
+                                                    </t>
+                                                </t>
+                                                </form>
+                                            </t>
+        
+                                    </div>
+                                </div>
+        
+                            </li>
+        <!--                        <li class="border-right-0 ml-lg-4 responsive_dynamic_menu">-->
+        <!--                            <div class="adjust-icon col-12 text-center">-->
+        <!--                                <a class="p-0 text-left custom_nav_a" href="#">Wishlist</a>-->
+        <!--                            </div>-->
+        <!--                        </li>-->
+                            <li class="border-right-0 ml-lg-4 responsive_dynamic_menu">
+                                <div class="col-12 adjust_cart">
+                                    <t t-set="website_sale_order" t-value="website.sale_get_order()" />
+                                    <t t-if ="website_sale_order and website_sale_order.cart_quantity">
+        
+                                        <a href="/shop/cart" class="link-dark cart_link custom_nav_a">
+                                            Cart <sup
+                                                style="font-size: calc(12px);position: initial;width: 2rem !important;border-radius: 0px;background: #BE222B;" t-attf-class="my_cart_quantity badge badge-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or ''" t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+                                        </a>
+                                    </t>
+                                    <t t-else="">
+                                        <a href="/shop/cart" class="link-dark cart_link custom_nav_a">Cart<sup
+                                                style="font-size: calc(12px);position: initial;width: 2rem !important;border-radius: 0px;background: #BE222B;" t-attf-class="my_cart_quantity badge badge-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or ''" t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/></a>
+                                    </t>
+                                </div>
+                            </li>
+                            <li class="border-right-0 responsive_dynamic_menu">
+                                <div class="col-12 text-center">
+                                    <a t-attf-href="/web/login" class="link-light pt-0 text-sm-left custom_nav_a sign_in_link" groups="base.group_public">
+                                        Sign in
+                                    </a>
+        
+                                    <a class="p-0 text-left custom_nav_a" type="button" data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false" t-ignore="true"
+                                       t-if="not user_id._is_public()" style="white-space: normal; color:#e3f0fc;">
+                                        <t t-esc="user_id.name[:23] + '...' if user_id.name and len(user_id.name) &gt; 25 else user_id.name"/>
+        
+                                    </a>
+                                    <div class="dropdown-menu js_usermenu logout_btn_txt btn--red" role="menu" style="height: 85px;">
+                                        <a href="/my/home" role="menuitem" class="dropdown-item">My Account</a>
+                                        <a id="o_logout" class="dropdown-item-text dropdown-item"  style="padding: 5px;"
+                                           t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="border-right-0 ml-lg-4 responsive_dynamic_menu">
+                                <div class="col-12 text-center">
+                                    <a class="p-0 text-left custom_nav_a" href="/contactus">Contact us</a>
+                                </div>
+                            </li>
+                            <li class="border-right-0 ml-lg-4 responsive_dynamic_menu">
+                                <div class="col-12 text-center">
+                                    <a class="p-0 text-left custom_nav_a"
+                                       t-attf-href="/web/content/#{res_company.sudo().product_catalog.id}" target="_blank">Catalog</a>
+                                </div>
+                            </li>
+                            <li class="border-right-0 ml-lg-4 responsive_dynamic_menu">
+                                <div class=" col-12 text-center">
+                                    <a class="p-0 text-left custom_nav_a" href="/brands">Our Brands</a>
+                                </div>
+                            </li>
+        
+        
+        
+                        </ul>
+                    </nav><!-- end .nav-menu -->
+                    <div id="mobile_div">
+                        <div class="mobile_menus">
+                            <div class="mob_sub" style="flex-basis: 50px;">
+                                <button type="button" class="mobile-nav-toggle d-lg-none"><i
+                                    class="icofont-navigation-menu fa-2x"></i></button>
+                            </div>
+                            <div class="mob_sub" style="flex-basis: 200px;">
+                                <a href="/" class="logo">
+                                <img t-att-src="'/logo.png?company=%s' % res_company.id"
+                                     t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name" style="height: 3rem;width: 6rem;"/>
+                                </a>
+                            </div>
+                            <div class="mob_sub" style="flex-basis: 150px; justify-content: space-evenly;">
+    
+                                <t t-set="website_sale_order" t-value="website.sale_get_order()" />
+                                <t t-if ="website_sale_order and website_sale_order.cart_quantity">
+                                        <t t-set="special_category"
+                                           t-value="request.env['product.public.category'].sudo().search([('name' ,'=',
+                                   'Specials')])"/>
+                                        <t t-if="special_category">
+                                            <a t-att-href="'/shop/category/%s' % special_category.id"><i
+                                                    class="fas fa-tag"  style="font-size:1rem">Sale</i></a>
+                                        </t>
+                                        <a href="/shop/cart" class="link-dark cart_link custom_nav_a">
+                                            <i class="fa fa-2x bi bi-cart" style="color: #ad3021;font-size: 1.8rem;"></i><sup
+                                                style="font-size: calc(10px);important;border-radius: 15px;background: #BE222B; vertical-align: top !important;" t-attf-class="my_cart_quantity badge badge-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or ''" t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+                                        </a>
+                                </t>
+                                <t t-else="">
+                                        <t t-set="special_category"
+                                           t-value="request.env['product.public.category'].sudo().search([('name' ,'=',
+                                            'Specials')])"/>
+                                        <t t-if="special_category">
+                                            <a t-att-href="'/shop/category/%s' % special_category.id"><i
+                                                    class="fas fa-tag"  style="font-size:1rem">Sale</i></a>
+                                        </t>
+                                        <a href="/shop/cart" class="link-dark cart_link custom_nav_a">
+                                            <i class="fa fa-2x bi bi-cart" style="color: #ad3021; font-size: 1.8rem;"></i><sup
+                                                style="font-size: calc(10px);important;border-radius: 15px;background: #BE222B; vertical-align: top !important;" t-attf-class="my_cart_quantity badge badge-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or ''" t-att-data-order-id="website_sale_order and website_sale_order.id or ''"/>
+                                        </a>
+                                </t>
+                            </div>
+                        </div>
+    
+                        <div class="custom_searchbox p-2">
+    <!--                        <t t-set="ci_rec"-->
+    <!--                           t-value="request.env['product.template'].sudo().search([('sale_ok', '=', True),('is_published', '=', True)])"/>-->
+    <!--                        <select id="search-input" placeholder="Search Products.." class="top_search"-->
+    <!--                                style="width: 100% !important;">-->
+    <!--                            <option value=""></option>-->
+    <!--                            <t t-foreach="ci_rec" t-as="ci">-->
+    <!--                                <option t-attf-src="/web/image/product.template/#{ci.id}/image_128" t-att-value="ci.id" t-esc="ci.name"/>-->
+    <!--                            </t>-->
+    <!--                        </select>-->
+                            <form method="get" action="/shop">
+                                <div t-attf-class="input-group #{_classes}" role="search">
+                                    <input type="text" name="search" class="search-query form-control oe_search_box" placeholder="Search..." t-att-value="search"/>
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary oe_search_button" aria-label="Search" title="Search"><i class="fa fa-search"/></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </header><!-- End Header -->
+
+        </xpath>
+    </template>
+
+    <template id="superasia_footer_custom" inherit_id="website.layout" name="Super Asia Custom Footer" active="False">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
+                <div class="container-fluid">
+                    <div class="row" style="background: #58585A;">
+                        <div class="col-12 col-md-6 offset-md-1 small pt-5">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <h3>Contact Us</h3>
+                                    <address>
+                                        Head Office
+                                        <br />
+                                        <t t-esc="res_company.street" />
+                                        <t t-esc="res_company.street2" />
+                                        ,
+                                        <br />
+                                        <t t-esc="res_company.city" />
+                                        ,
+                                        <t t-esc="res_company.state_id.name" />
+                                        (
+                                        <t t-esc="res_company.zip" />
+                                        )
+                                        <br />
+                                        <t t-esc="res_company.country_id.name" />
+                                        <br />
+                                        Calgary (New):
+                                        <br />
+                                        Unit #110 - 5423 61 Avenue Southeast,
+                                        <br />
+                                        Calgary,
+                                        <br />
+                                        Alberta T2C 5N7
+                                        <br />
+                                    </address>
+                                    <a t-att-href="'mailto:%s' % res_company.phone" href="@" class="mb-1 w-100 float-left text-white">
+                                        <i class="icofont-phone"></i>
+                                        <t t-esc="res_company.phone" />
+                                    </a>
+                                    <a t-att-href="'mailto:%s' % res_company.email" href="mailto:cservice@superasia.ca" class="mb-1 w-100 float-left text-white">
+                                        <i class="icofont-ui-message"></i>
+                                        <t t-esc="res_company.email" />
+                                    </a>
+                                    <a t-att-href="res_company.google_map_link()" target="_BLANK" class="mb-1 w-100 float-left text-white">
+                                        <i class="icofont-google-map"></i>
+                                        OTHER LOCATIONS
+                                    </a>
+                                </div>
+                                <div class="col-md-7">
+                                    <h3>Other Links</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="#" class="mb-1 w-100 float-left text-white">About Us</a>
+                                            <a href="#" class="mb-1 w-100 float-left text-white">Blog</a>
+                                            <a href="/contactus" class="mb-1 w-100 float-left text-white">Contact Us</a>
+                                            <a href="#" class="mb-1 w-100 float-left text-white">Careers</a>
+                                            <a href="#" class="mb-1 w-100 float-left text-white">FAQ's</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="#" class="mb-1 w-100 float-left text-white">T &amp; C</a>
+                                            <a href="/" class="mb-1 w-100 float-left text-white">How It Works</a>
+                                            <a href="/b2b_activation" class="mb-1 w-100 float-left text-white">Retailer Login</a>
+                                            <a href="#" class="mb-1 w-100 float-left text-white">XML Sitemap</a>
+                                        </div>
+                                    </div> <!-- end row -->
+                                </div> <!-- end col-md-7 -->
+                            </div> <!-- end row -->
+                        </div> <!-- end col-md-7 -->
+                        <div class="col-md-5 bg-color-right pt-5" style="background: #fff;">
+                            <div class="row">
+                                <div class="col-sm-12 pl-5 responsive-footer">
+                                    <!--   <h3 class="py-3">Subscribe to our Newsletter</h3>
+                                    <p>Join Our Newsletter for New Offers / Arrivals &amp; more!</p> -->
+
+                                    <!--                                    <div class="input-group pb-4">-->
+                                    <!--                                        <div class="form-outline w-100">-->
+                                    <!--                                            <input id="search-input" type="search" class="form-control" value="Enter your mail..." onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"/>-->
+                                    <!--                                        </div>-->
+                                    <!--                                        <button id="search-button" type="button" class="btn btn-secondary-footer ml-n1">SUBSCRIBE-->
+                                    <!--                                        </button>-->
+                                    <!--                                    </div>-->
+                                </div>
+                                <div class="d-flex desktop-social-icons ml-4 mt-4">
+                                    <div class="col-9 row">
+                                        <div class="col-sm-auto desktop-social-icons">
+                                            <a t-att-href="res_company.social_facebook" target="_blank">
+                                                <img src="/bista_superasia_theme/static/src/img/facebook-with-circle.png" alt="facebook" class="pb-3" />
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-auto desktop-social-icons">
+                                            <a t-att-href="res_company.social_linkedin" target="_blank">
+                                                <img src="/bista_superasia_theme/static/src/img/linkedin-with-circle.png" alt="linkedin" class="pb-3" />
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-auto desktop-social-icons">
+                                            <a t-att-href="res_company.social_instagram" target="_blank">
+                                                <img src="/bista_superasia_theme/static/src/img/instragram-circle-icon.png" alt="Instagram" class="pb-3" />
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-auto desktop-social-icons">
+                                            <a t-att-href="res_company.social_youtube" target="_blank">
+                                                <img src="/bista_superasia_theme/static/src/img/youtube-with-circle.png" alt="youtube" class="pb-3" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="search-button" type="button" class="btn btn-primary" style="border: 1px solid #BE222B;border-radius: 5px;">ENGLISH
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-auto d-lg-none d-md-none pb-3 responsive-social-icons w-100">
+                                    <a href="#" target="_blank" class="pr-2">
+                                        <img src="/bista_superasia_theme/static/src/img/facebook-with-circle.png" alt="facebook" class="pb-3" />
+                                    </a>
+                                    <a href="#" target="_blank" class="pr-2">
+                                        <img src="/bista_superasia_theme/static/src/img/linkedin-with-circle.png" alt="linkedin" class="pb-3" />
+                                    </a>
+                                    <a href="#" target="_blank" class="pr-2">
+                                        <img src="/bista_superasia_theme/static/src/img/twitter-with-circle.png" alt="twitter" class="pb-3" />
+                                    </a>
+                                    <a href="#" target="_blank">
+                                        <img src="/bista_superasia_theme/static/src/img/youtube-with-circle.png" alt="youtube" class="pb-3" />
+                                    </a>
+                                    <button id="search-button" type="button" class="btn btn-primary pull-right" style="border: 1px solid #BE222B;border-radius: 5px;
+}">ENGLISH
+                                        </button>
+                                </div>
+                            </div> <!-- end row -->
+                        </div> <!-- end col-md-5 -->
+                    </div> <!-- End row -->
+                </div> <!-- End container-fluid -->
+            </div> <!-- End Footer -->
+        </xpath>
+    </template>
+
+    <template id="superasia_footer_copyright_custom" inherit_id="web.frontend_layout" name="SuperAsiaFooter Copyright">
+        <xpath expr="//div[hasclass('o_footer_copyright')]" position="replace">
+            <div class="sub-footer sub-footer text-center pt-1">
+                <p class="mb-1">© Copyright 2021 Super Asia Foods.</p>
+            </div>
+            <a href="#" class="back-to-top">
+                <i class="icofont-simple-up"></i>
+            </a>
+        </xpath>
+    </template>
+
+    <!-- Superasia Footer Options -->
+    <template id="superasia_footer_switches" inherit_id="website.snippet_options">
+        <xpath expr="//div/we-select[@data-variable='footer-template']" position="inside">
+            <we-button title="superasia_footer_custom"
+            data-customize-website-views="bista_superasia_theme.superasia_footer_custom"
+            data-customize-website-variable="'superasia_footer_custom'"
+            data-img="/bista_superasia_theme/static/src/img/footer-option-1.svg"/>
+        </xpath>
+        <xpath expr="//div/we-select[@data-variable='header-template']" position="inside">
+            <we-button title="Superasia Custom Header: Header 1"
+                data-name="superasia_custom_header"
+                data-customize-website-views="bista_superasia_theme.superasia_custom_header"
+                data-customize-website-variable="'superasia_custom_header'"
+                data-img="/bista_superasia_theme/static/src/img/header-option-1.svg"/>
+        </xpath>
+    </template>
+</odoo>
