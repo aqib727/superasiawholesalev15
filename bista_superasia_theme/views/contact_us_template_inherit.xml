@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- TODO: website_form module not exist in odoo 15 -->
+    <template id="contactus_form_inherite" inherit_id="website_form.contactus_form" name="Contactus_form Inherit">
+        <xpath expr="//a[hasclass('btn', 'btn-primary', 'btn-lg', 'o_website_form_send')]" position="attributes">
+            <attribute name="class">btn custom_them_primary o_website_form_send text-white</attribute>
+        </xpath>
+    </template>
+    <template id="multi_company_description" name="Company Description">
+        <address itemscope="itemscope" itemtype="http://schema.org/Organization">
+            <!-- TODO widget contact must add itemprop attributes -->
+            <div t-field="company.partner_id" t-options='{
+                    "widget": "contact",
+                    "fields": ["name", "address", "phone", "mobile", "email"]}' />
+            <t t-if="not company.google_map_img()">
+                <span class="fa fa-map-marker fa-fw mt16" role="img" aria-label="Address" title="Address" />
+                <a t-att-href="company.google_map_link()" target="_BLANK"> Google Maps</a>
+            </t>
+        </address>
+        <t t-if="company.google_map_img()">
+            <a t-att-href="company.google_map_link()" target="_BLANK">
+                <img class="img-fluid" t-att-src="company.google_map_img()" alt="Google Maps" />
+            </a>
+        </t>
+    </template>
+    <template id="contact_us_inherite" inherit_id="website.contactus" name="Contact Us Inherit">
+        <xpath expr="//section[hasclass('s_text_block')]" position="attributes">
+            <attribute name="class">s_text_block p-0</attribute>
+        </xpath>
+        <xpath expr="//t[@t-call='website.company_description']" position="replace">
+            <t t-set="companies" t-value="request.env['res.company'].sudo().search([])" />
+            <t t-foreach="companies" t-as="company">
+                <t t-call="bista_superasia_theme.multi_company_description">
+                    <t t-set="company" t-value="company" />
+                </t>
+            </t>
+
+        </xpath>
+    </template>
+</odoo>
