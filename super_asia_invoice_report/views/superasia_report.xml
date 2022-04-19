@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+       
+
+ <record id="sales_rep_excel_report_ids" model="ir.actions.report">
+            <field name="name">Print to XLSX</field>
+            <field name="model">account.invoice.sales.rep.report</field>
+            <field name="binding_model_id" ref="model_account_invoice_sales_rep_report"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">super_asia_invoice_report.sales_rep_excel_report</field>
+            <field name="report_file">super_asia_invoice_report.sales_rep_excel_report</field>
+            <field name="attachment">'SuperAsia.pdf'</field>
+            <field name="attachment_use">True</field>
+            <field name="binding_view_types">list</field>
+        </record>
+
+
+</odoo>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="product_template_form_report" model="ir.ui.view">
+            <field name="name">product.templatereport.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="website_sale.product_template_form_view"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+               
+<xpath expr="//field[@name='uom_id']" position="before">
+<field name="x_studio_brand"/>
+      </xpath>
+                <xpath expr="//div[@name='volume']" position="after">
+					<label for="logistic_length" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                    <div class="o_row" name="logistic_length" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                        <field name="logistic_length" string="Length"/>
+                        <span><field name="length_uom_name"/></span>
+                    </div>
+
+					<label for="logistic_width" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                    <div class="o_row" name="logistic_width" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                        <field name="logistic_width" string="Length"/>
+                        <span><field name="length_uom_name"/></span>
+                    </div>
+
+					<label for="logistic_height" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                    <div class="o_row" name="logistic_height" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                        <field name="logistic_height" string="Length"/>
+                        <span><field name="length_uom_name"/></span>
+                    </div>
+				</xpath>
+				<xpath expr="//group[@name='inventory']">
+					<group name="pallet_config">
+						<group name="group_pallet_config" string="Pallet Configuration" attrs="{'invisible': [('type', 'not in', ['product', 'consu'])]}">
+							<label for="pallet_no_of_cases" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+		                    <div class="o_row" name="pallet_no_of_cases" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+		                        <field name="pallet_no_of_cases"/>
+		                    </div>
+
+							<label for="pallet_no_of_layers" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+		                    <div class="o_row" name="pallet_no_of_layers" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+		                        <field name="pallet_no_of_layers"/>
+		                    </div>
+
+							<label for="pallet_boxes_per_layer" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+		                    <div class="o_row" name="pallet_boxes_per_layer" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+		                        <field name="pallet_boxes_per_layer"/>
+		                    </div>
+						</group>
+					</group>
+				</xpath>
+            </field>
+        </record>
+
+
+        <record id="account_invoice_sales_rep_report_view1" model="ir.ui.view">
+            <field name="name">Sales Rep Invoice Report</field>
+            <field name="model">account.invoice.sales.rep.report</field>
+            <field name="arch" type="xml">
+            <form string="Report Options">
+                <field name="type" invisible="1"/>
+                <group>
+                    <group>
+                        <field name="date_from"
+                               attrs="{'required':[('type','!=','age_report')],
+                               'invisible': [('type', '=', 'age_report')]}"/>
+                        <field name="user_id" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="date_to" required="1"/>
+                        <field name="company_id" options="{'no_create': True}"
+                               groups="base.group_multi_company"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="sales_rep_invoice_report_excel"
+                            string="Print" type="object" default_focus="1"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('type', '!=', 'sal_report')]}"/>
+                    <button name="sales_rep_invoice_aging_report_excel"
+                            string="Print" type="object" default_focus="1"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('type', '!=', 'age_report')]}"/>
+                    <button name="sales_rep_invoice_closing_report_excel"
+                            string="Print" type="object" default_focus="1"
+                            class="oe_highlight"
+                            attrs="{'invisible': [('type', '!=', 'close_report')]}"/>
+                    <button string="Cancel" class="btn btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+<!--        Top Menu-->
+     
+
+
+
+        <record id="action_invoice_sales_rep_menu1" model="ir.actions.act_window">
+            <field name="name">Sales Rep Wise Invoice Report</field>
+            <field name="res_model">account.invoice.sales.rep.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_invoice_sales_rep_report_view1"/>
+            <field name="domain">[('type', '=', 'sal_report')]</field>
+            <field name="context">{'default_type': 'sal_report'}</field>
+            <field name="target">new</field>
+        </record>
+        <!--Super Asia Report report parent menu -->
+<!--        <menuitem id="account_sales_rep_reports_menu1" name="Super Asia Report"-->
+<!--                  parent="menu_custom_report_SA" sequence="5"/>-->
+        <!--Invoice report action-->
+   
+        <!--aging report action-->
+        <record id="action_invoice_sales_rep_aging_menu1" model="ir.actions.act_window">
+            <field name="name">Sales Rep Wise Aging Report</field>
+            <field name="res_model">account.invoice.sales.rep.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_invoice_sales_rep_report_view1"/>
+            <field name="domain">[('type', '=', 'age_report')]</field>
+            <field name="context">{'default_type': 'age_report'}</field>
+            <field name="target">new</field>
+        </record>
+        <!--aging report menu-->
+      
+        <!--Closing report action-->
+        <record id="action_invoice_sales_rep_closing_menu1" model="ir.actions.act_window">
+            <field name="name">Sales Rep Wise Closing Report</field>
+            <field name="res_model">account.invoice.sales.rep.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_invoice_sales_rep_report_view1"/>
+            <field name="domain">[('type', '=', 'close_report')]</field>
+            <field name="context">{'default_type': 'close_report'}</field>
+            <field name="target">new</field>
+        </record>
+        <!--Closing report menu-->
+        
+
+
+
+       <menuitem id="menu_superasiareports" name="SuperAsia Reports" sequence="5" parent="account_accountant.menu_accounting" groups="account.group_account_user,account.group_account_manager,account.group_account_invoice,account.group_account_readonly">
+           
+            
+     <menuitem id="menuitem_sales_rep_invoice_report1"
+                      action="action_invoice_sales_rep_menu1"
+                      name="Sales Rep Wise Invoice Report"
+                      groups="account.group_account_user,account.group_account_manager,account.group_account_invoice,account.group_account_readonly"
+                      sequence="1"/>
+
+  <menuitem id="menuitem_sales_rep_invoice_aging_report1"
+                      action="action_invoice_sales_rep_aging_menu1"
+                      name="Sales Rep Wise Aging Report"
+                      groups="account.group_account_user,account.group_account_manager,account.group_account_invoice,account.group_account_readonly"
+                      sequence="2"/>
+
+<menuitem id="menuitem_sales_rep_invoice_closing_report1"
+                  action="action_invoice_sales_rep_closing_menu1"
+                  name="Sales Rep Wise Closing Report"
+                  groups="account.group_account_user,account.group_account_manager,account.group_account_invoice,account.group_account_readonly"
+                  sequence="3"/>
+            </menuitem>
+
+
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+super_asia_invoice_report.access_account_invoice_sales_rep_report,access_account_invoice_sales_rep_report,super_asia_invoice_report.model_account_invoice_sales_rep_report,base.group_user,1,1,1,1
