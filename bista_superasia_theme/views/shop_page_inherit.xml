@@ -1,45 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-
     <!-- Inherited template from base -->
-    <!--    https://codepen.io/webstuff/pen/JKgwkY-->
     <template id="product_grid_or_list_option_inherite" inherit_id="website_sale.add_grid_or_list_option" name="Grid or List button inherit">
         <xpath expr="//div[hasclass('o_wsale_apply_layout')]" position="replace">
-            <div class="">
-                <div class="col-md-12">
-                    <t t-set="list_price_desc_label">Catalog price: High to Low</t>
-                    <t t-set="list_price_asc_label">Catalog price: Low to High</t>
-                    <t t-set="name_asc_label">Name: A to Z</t>
-                    <t t-set="name_desc_label">Name: Z to A</t>
+            <div class="col-4 text-md-right">
+                <div class="col-md-12 mb-2">
+                    <t t-set="list_price_asc_label">Price - Low to High</t>
+                    <t t-set="list_price_desc_label">Price - High to Low</t>
+                    <t t-set="newest_arrivals_desc_label">Newest arrivals</t>
+                    <t t-set="name_asc_label">Name</t>
                     <t t-set="website_sale_sortable" t-value="[
-                (list_price_desc_label, 'list_price desc'),
-                (list_price_asc_label, 'list_price asc'),
-                (name_asc_label, 'name asc'),
-                (name_desc_label, 'name desc')
-            ]" />
-                    <t t-set="website_sale_sortable_current" t-value="[sort for sort in website_sale_sortable if sort[1]==request.params.get('order', '')]" />
+                        (list_price_asc_label, 'list_price asc'),
+                        (list_price_desc_label, 'list_price desc'),
+                        (newest_arrivals_desc_label, 'create_date desc'),
+                        (name_asc_label, 'name asc')
+                    ]"/>
+                    <t t-set="website_sale_sortable_current" t-value="[sort for sort in website_sale_sortable if sort[1]==request.params.get('order', '')]"/>
+                    <!-- <div class="o_sortby_dropdown dropdown dropdown_sorty_by ml-3 pb-2"> -->
                     <div class="dropdown_mobile dropdown mt-2">
                         <a role="button" href="#" class="btn dropdown-toggle text-black" data-toggle="dropdown">
                             <span class="d-none d-lg-inline">
-                                <t t-if='len(website_sale_sortable_current)'>
-                                    Sorting by :
-                                    <t t-raw='website_sale_sortable_current[0][0]' />
+                                <t t-if='website_sale_sortable_current'>
+                                    Sorting by : 
+                                    <t t-esc="website_sale_sortable_current[0][0]"/>
                                 </t>
                                 <t t-else='1'>
                                     Sort by
                                 </t>
                             </span>
-                            <i class="fa fa-sort-amount-asc d-lg-none" />
+                            <i class="fa fa-sort-amount-asc d-lg-none"/>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" role="menu">
                             <t t-foreach="website_sale_sortable" t-as="sortby">
                                 <a role="menuitem" rel="noindex,nofollow" t-att-href="keep('/shop', order=sortby[1])" class="dropdown-item text-black" style="font-size: 1rem;">
-                                    <span t-raw="sortby[0]" />
+                                    <span t-out="sortby[0]"/>
                                 </a>
                             </t>
                         </div>
-                        <div id="apply_filter_mobile" t-if="category or attrib_values">
+                        <!-- <div id="apply_filter_mobile" t-if="category or attrib_values">
                             <table class="table table-borderless mb-0" t-if="category or attrib_values">
                                 <tbody>
                                     <tr t-if="category">
@@ -96,32 +94,27 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
                 <div class="col-md-12 text-right">
-                    <div class="btn-group-toggle d-none d-sm-inline-flex mt-3 o_wsale_apply_layout" data-toggle="buttons">
-                        <label t-attf-class="btn #{'active' if layout_mode == 'list' else None} fa fa-th-list o_wsale_apply_list" title="List">
-                            <input id='ck_list' type="radio" name="wsale_products_layout" t-att-checked="'checked' if layout_mode == 'list' else None" />
+                    <div class="btn-group btn-group-toggle ml-3 mb-2 d-none d-sm-inline-flex o_wsale_apply_layout" data-toggle="buttons">
+                        <label t-attf-class="btn btn-light border-0 #{'active' if layout_mode != 'list' else None} fa fa-th-large o_wsale_apply_grid" title="Grid">
+                            <input type="radio" name="wsale_products_layout" t-att-checked="'checked' if layout_mode != 'list' else None"/>
                         </label>
-                        <label t-attf-class="btn #{'active' if layout_mode != 'list' else None} fa fa-th o_wsale_apply_grid ml-3" title="Grid">
-                            <input id='ck_grid' type="radio" name="wsale_products_layout" t-att-checked="'checked' if layout_mode != 'list' else None" />
+                        <label t-attf-class="btn btn-light border-0 #{'active' if layout_mode == 'list' else None} fa fa-th-list o_wsale_apply_list" title="List">
+                            <input type="radio" name="wsale_products_layout" t-att-checked="'checked' if layout_mode == 'list' else None"/>
                         </label>
                     </div>
                 </div>
 
                 <!-- Modal -->
-                <div class="modal fade" id="apply_filter_mobile_modal" tabindex="-1" role="dialog" aria-labelledby="apply_filter_mobile_modalLabel" aria-hidden="true">
+                <!-- <div class="modal fade" id="apply_filter_mobile_modal" tabindex="-1" role="dialog" aria-labelledby="apply_filter_mobile_modalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
                                 <t t-if="attrib_values or category">
-                                    <!-- <button type="button" class="btn custom_them_primary mb-n2 ml-n3 mt-3 text-100 text-lg-left text-white"
-                                        data-target="#wsale_products_applied_filters">
-                                        Applied Filters
-                                    </button> -->
-
                                     <div class="wpf-applied" id="wsale_products_applied_filters">
                                         <a href="/shop" class="float-right"> Clear All </a>
                                         <form class="js_attributes_applied" method="get">
@@ -176,12 +169,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </xpath>
 
     </template>
-    <template id="product_pricelist_dropdown_inherite" inherit_id="website_sale.pricelist_list" name="Product PriceList Dropdown">
+
+    <template id="product_pricelist_dropdown_inherite" inherit_id="website_sale.pricelist_list"  name="Product PriceList Dropdown">
         <xpath expr="//div" position="attributes">
             <attribute name="t-attf-class">d-none</attribute>
         </xpath>
@@ -189,18 +183,23 @@
             <attribute name="class">dropdown-item text-dark</attribute>
         </xpath>
     </template>
-    <template id="product_shortby_dropdown_inherite" inherit_id="website_sale.sort" name="Product Short By Dropdown inherit">
-        <xpath expr="//div[hasclass('dropdown_sorty_by')]" position="attributes">
-            <attribute name="class">d-none</attribute>
+    <template id="product_shortby_dropdown_inherite" name="Sor template Inh" inherit_id="website_sale.sort">
+        <xpath expr="//div[hasclass('o_sortby_dropdown')]" position="before">
+            <t t-call="website.pager">
+                <t t-set="_classes">col-12 col-md-4 justify-content-between mt-2 ml-md-2</t>
+            </t>
         </xpath>
-
+        <xpath expr="//div[hasclass('o_sortby_dropdown')]" position="attributes">
+            <attribute name="class" separator=" " add="d-none"></attribute>
+        </xpath>
     </template>
 
     <template id="products_items_inherite" inherit_id="website_sale.products_item" name="Product Item Inherit">
         <xpath expr="//form/div/a[@t-att-href='product_href']" position="attributes">
             <attribute name="class">d-block h-100 img-box</attribute>
         </xpath>
-        <xpath expr="//div[hasclass('o_wsale_product_information')]" position="replace">
+        <xpath expr="//a[hasclass('o_product_link','css_editable_mode_hidden')]" position="replace"/>
+        <xpath expr="//form//div[hasclass('o_wsale_product_information')]" position="replace">
             <div class="p-0 text-center">
                 <div class="p-2 o_wsale_product_information_text">
                     <h6 class="o_wsale_products_item_title p-2">
@@ -210,12 +209,14 @@
 
                     <t t-set="combination_info" t-value="product._get_combination_info(only_template=False, add_qty=add_qty or 1, pricelist=pricelist,product_id=product.product_variant_id.id)" />
 
-                    <h6 class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
-                        <del t-attf-class="text-danger mr-2 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                    <div class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+
                         <!--                        <span t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>-->
-                        <span t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
-                        <span itemprop="price" style="display:none;" t-esc="combination_info['price']" />
-                        <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
+                        <span class="h6" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                        <del t-attf-class="text-danger mr-2 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                        <span class="h6" itemprop="price" style="display:none;" t-esc="combination_info['price']" />
+                        <span class="h6" itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
+                        <!-- NOTE: Need superasiab2b_b2c module
                         <t t-set="old_price" t-value="0" />
                         <t t-if="request.env.user.user_has_groups('base.group_public') or request.env.user.user_has_groups('superasiab2b_b2c.group_b2cuser')">
                             <t t-set="old_price" t-value="product.b2c_old_price" />
@@ -224,72 +225,108 @@
                             <t t-set="old_price" t-value="product.b2b_old_price" />
                         </t>
                         <span itemprop="oldPrice" style="display:none;" t-esc="old_price" />
-                        <span t-if="old_price > 0.0 and old_price > combination_info['price'] and combination_info['price'] > 0.0" t-esc="old_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" style="text-decoration: line-through; white-space: nowrap; font-weight: bold; color: black; padding-left: 0.2rem;" />
-                    </h6>
+                        <span t-if="old_price > 0.0 and old_price > combination_info['price'] and combination_info['price'] > 0.0" t-esc="old_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" style="text-decoration: line-through; white-space: nowrap; font-weight: bold; color: black; padding-left: 0.2rem;" /> 
+                        -->
+                    </div>
+                    <!-- NOTE: need superasiab2b_b2c module -->
+                    <!-- <t t-if="request.env.user.user_has_groups('base.group_public') or request.env.user.user_has_groups('superasiab2b_b2c.group_b2cuser')"> -->
+                    <t t-if="request.env.user.user_has_groups('base.group_public')">
+                        <a href="/b2b_activation" class="font-weight-bold" style="font-size: 10px; text-decoration: underline;">
+                            Login for Bulk Pricing
+                        </a>
+                    </t>
+                    <!-- 
+                    NOTE: Need superasiab2b_b2c module
                     <t t-if="request.env.user.user_has_groups('base.group_public') or request.env.user.user_has_groups('superasiab2b_b2c.group_b2cuser')">
                         <a href="/b2b_activation" class="font-weight-bold" style="font-size: 10px; text-decoration: underline;">Login for Bulk Pricing</a>
-                    </t>
-                    <t t-set="combination" t-value="product._get_first_possible_combination()" />
+                    </t> 
+                    -->
+                    <!-- <t t-set="combination" t-value="product._get_first_possible_combination()" />
                     <t t-set="combination_info" t-value="product._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)" />
-                    <t t-set="product_variant" t-value="product.env['product.product'].browse(combination_info['product_id'])" />
+                    <t t-set="product_variant" t-value="product.env['product.product'].browse(combination_info['product_id'])" /> -->
 
                     <t t-set="in_cart_lines" t-value="request.website.sale_get_order().order_line" />
 
-                    <t t-if="request.env.user.user_has_groups('superasiab2b_b2c.group_b2baccount') or request.env.user.user_has_groups('base.group_system')">
+                    <!-- 
+                        NOTE: need confirmation and superasiab2b_b2c module
+                        <t t-if="request.env.user.user_has_groups('superasiab2b_b2c.group_b2baccount') or request.env.user.user_has_groups('base.group_system')">
                         <div>
                             <h6>
                                 <span t-esc="combination_info['product_uom']" />
                             </h6>
                         </div>
-                    </t>
+                    </t> -->
+                    <div>
+                        <h6>
+                            <span t-esc="combination_info['product_uom']" />
+                        </h6>
+                    </div>
 
-                    <form method="POST">
-                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
-                        <div class="js_product js_main_product mt-1">
-                            <t t-placeholder="select">
-                                <input type="hidden" class="product_id" name="product_id" t-att-value="product_variant.id" />
-                                <input type="hidden" class="product_template_id" name="product_template_id" t-att-value="product.id" />
-                            </t>
-                            <!-- <t t-if="product_variant.qty_available >= 1">
-                                <a t-att-class="'btn btn-cart mb-2 text-center text-uppercase text-white add_to_crt d-none' if product_variant.id in in_cart_lines.mapped('product_id').ids else 'btn btn-cart mb-2 text-center text-uppercase text-white add_to_crt'" role="button">Add</a>
-                            </t> -->
-                            <t t-set="product_qty_available" t-value="(round(combination_info['onhand_qty']) - combination_info['updated_cart_qty'])" />
-                            <t t-set="product_avail_qty" t-value="(round(combination_info['avail_qty']) - combination_info['updated_cart_qty'])" />
-                            <t t-if="product_qty_available >= 1">
-                                <p t-if="product_avail_qty &lt; 1 and request.env.user.user_has_groups('superasiab2b_b2c.group_b2baccount')" style="color: #00008b;font-weight: 600;font-size: 10px;">Low Stock, Subject to availability</p>
-                                <a t-att-class="'btn btn-cart mb-2 text-center text-uppercase text-white add_to_crt d-none' if product_variant.id in in_cart_lines.mapped('product_id').ids else 'btn btn-cart mb-2 text-center text-uppercase text-white add_to_crt'" role="button">Add</a>
-                            </t>
-                            <t t-else="">
-                                <div class="availability_message_6 font-weight-bold text-danger">
-                                    <i class="fa fa-exclamation-triangle" role="img" aria-label="Warning" title="Warning"></i>
-                                    SOLD OUT
-                                </div>
-                            </t>
+                    <t t-set="product_variant" t-value="product.env['product.product'].browse(combination_info['product_id'])" /> 
+                    <div class="js_product js_main_product mt-1">
+                        <t t-placeholder="select">
+                            <input type="hidden" class="product_id" name="product_id" t-att-value="product_variant.id" />
+                            <input type="hidden" class="product_template_id" name="product_template_id" t-att-value="product.id" />
+                        </t>
+                        <!-- <t t-if="product_variant.qty_available >= 1">
+                            <a t-att-class="'btn btn-cart mb-2 text-center text-uppercase text-white quick_add_to_cart d-none' if product_variant.id in in_cart_lines.mapped('product_id').ids else 'btn btn-cart mb-2 text-center text-uppercase text-white quick_add_to_cart'" role="button">Add</a>
+                        </t> -->
+                        <t t-set="product_qty_available" t-value="(round(combination_info['onhand_qty']) - combination_info['updated_cart_qty'])"/>
+                        <t t-set="product_avail_qty" t-value="(round(combination_info['avail_qty']) - combination_info['updated_cart_qty'])"/>
+                        <t t-if="product_qty_available >= 1">
+                            <p t-if="product_avail_qty &lt; 1 and request.env.user.user_has_groups('superasiab2b_b2c.group_b2baccount')" style="color: #00008b;font-weight: 600;font-size: 10px;">Low Stock, Subject to availability</p>
+                            <a t-att-class="'btn btn-cart mb-2 text-center text-uppercase text-white quick_add_to_cart d-none' if product_variant.id in in_cart_lines.mapped('product_id').ids else 'btn btn-cart mb-2 text-center text-uppercase text-white quick_add_to_cart'" role="button">Add</a>
+                        </t>
+                        <t t-else="">
+                            <div class="availability_message_6 font-weight-bold text-danger">
+                                <i class="fa fa-exclamation-triangle" role="img" aria-label="Warning" title="Warning"></i>
+                                SOLD OUT
+                            </div>
+                        </t>
 
-                            <div id="dynamic_product_qty" t-att-class="'css_quantity input-group input-group-sm mx-auto p-1' if product_variant.id in in_cart_lines.mapped('product_id').ids else 'css_quantity input-group input-group-sm mx-auto d-none p-1'">
-                                <div class="input-group-prepend">
-                                    <a t-attf-href="#" class="btn btn-link js_add_cart_json d-md-inline-block border-danger" aria-label="Remove one" title="Remove one">
-                                        <i class="fa fa-minus"></i>
-                                    </a>
-                                </div>
-                                <input type="text" readonly="True" t-att-data-max="combination_info['onhand_qty']" t-att-data-line-id="in_cart_lines.filtered(lambda lm:lm.product_id.id == product_variant.id).id" t-att-data-product-id="product_variant.id" class="custom_js_quantity form-control quantity text-center bg-danger text-white h-auto" t-att-value="int(in_cart_lines.filtered(lambda lm:lm.product_id.id == product_variant.id).product_uom_qty)" />
-                                <div class="input-group-append">
-                                    <a t-attf-href="#" id="custom_buy" class="btn btn-link float_left js_add_cart_json d-md-inline-block border-danger" aria-label="Add one" title="Add one">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                </div>
+                        <div t-att-class="'css_quantity input-group input-group-sm mx-auto p-1 dynamic_product_qty' if product_variant.id in in_cart_lines.mapped('product_id').ids else 'css_quantity input-group input-group-sm mx-auto d-none p-1 dynamic_product_qty'">
+                            <div class="input-group-prepend">
+                                <a t-attf-href="#" class="btn btn-link js_add_cart_json d-md-inline-block border-danger" aria-label="Remove one" title="Remove one">
+                                    <i class="fa fa-minus"></i>
+                                </a>
+                            </div>
+                            <input type="text"
+                                    readonly="True"
+                                    t-att-data-max="combination_info['onhand_qty']"
+                                    t-att-data-line-id="in_cart_lines.filtered(lambda lm:lm.product_id.id == product_variant.id).id" t-att-data-product-id="product_variant.id"
+                                    class="custom_js_quantity form-control quantity text-center bg-danger text-white h-auto" t-att-value="int(in_cart_lines.filtered(lambda lm:lm.product_id.id == product_variant.id).product_uom_qty)" />
+                            <div class="input-group-append">
+                                <a t-attf-href="#" id="custom_buy" class="btn btn-link float_left js_add_cart_json d-md-inline-block border-danger" aria-label="Add one" title="Add one">
+                                    <i class="fa fa-plus"></i>
+                                </a>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    
                 </div>
-                <div class="o_wsale_product_btn" />
+                <div class="o_wsale_product_btn pl-2" />
             </div>
         </xpath>
     </template>
-    <template id="shop_page_products_inherite" inherit_id="website_sale.products" name="Shop Page Product Inherit">
+
+    <template id="shop_page_products_inherite" inherit_id="website_sale.products"  name="Shop Page Product Inherit">
+        <xpath expr="//div[@id='products_grid_before']/div" position="before">
+            <br/>
+            <span style="font-size: calc(15px + 0.6vw); color:gray;">FILTERS</span>
+            
+        </xpath>
+        <xpath expr="//div[@id='products_grid']//div[hasclass('products_header')]" position="attributes">
+            <attribute name="class">flex-md-nowrap form-inline mb-4 products_header</attribute>
+        </xpath>
+        <xpath expr="//t[@t-call='website_sale.search']" position="replace">
+            <t t-call="website_sale.search">
+                <t t-set="_classes" t-valuef="w-100  mb-2 ml-2 mt-3"/>
+                <t t-set="search" t-value="original_search or search"/>
+            </t>
+        </xpath>
         <xpath expr="//div[hasclass('container', 'oe_website_sale')]" position="attributes">
             <attribute name="class">oe_website_sale</attribute>
-            <attribute name="t-att-style">'padding-right:5%;padding-left:10%' if request.env.user.id == request.env.ref('base.public_user').id else 'padding-right:1%;padding-left:1%'</attribute>
+            <attribute name="t-att-style">'padding-right:5%;padding-left:8%' if request.env.user.id == request.env.ref('base.public_user').id else 'padding-right:1%;padding-left:1%'</attribute>
         </xpath>
 
         <xpath expr="//div[hasclass('row','o_wsale_products_main_row')]" position="attributes">
@@ -297,20 +334,19 @@
         </xpath>
 
         <xpath expr="//div[@id='products_grid']" position="attributes">
-            <attribute name="t-attf-class">col p-lg-0 pt-lg-4 #{'o_wsale_layout_list' if layout_mode == 'list' else ''}</attribute>
+                <attribute name="t-attf-class">col col-md-10 p-lg-0 pt-lg-4 #{'o_wsale_layout_list' if layout_mode == 'list' else ''}</attribute>
         </xpath>
 
         <xpath expr="//div[@id='products_grid_before']" position="attributes">
-            <attribute name="t-attf-class">col-lg-2 d-flex flex-column pt-lg-2</attribute>
+                <attribute name="t-attf-class">col-lg-2 d-flex flex-column pt-lg-2</attribute>
         </xpath>
 
-
-        <xpath expr="//div[hasclass('o_wsale_products_grid_table_wrapper')]" position="replace">
+        <!-- NOTE: not needed-->
+        <!-- <xpath expr="//div[hasclass('o_wsale_products_grid_table_wrapper')]" position="replace">
             <div t-if="bins" class="o_wsale_products_grid_table_wrapper">
                 <table class="table table-borderless m-0" t-att-data-ppg="ppg" t-att-data-ppr="ppr">
                     <colgroup t-ignore="true">
-                        <!-- Force the number of columns (useful when only one row of (x < ppr) products) -->
-                        <col t-foreach="ppr" t-as="p" />
+                        <col t-foreach="ppr" t-as="p"/>
                     </colgroup>
                     <tbody>
                         <tr t-foreach="bins" t-as="tr_product">
@@ -318,23 +354,23 @@
                                 <t t-if="td_product">
                                     <t t-set="product" t-value="td_product['product']" />
                                     <td class="oe_product">
-                                        <div t-att-style="'height: 18vw; 'if layout_mode == 'grid' else False" t-attf-class="o_wsale_product_grid_wrapper o_wsale_product_grid_wrapper_#{td_product['x']}_#{td_product['y']} mb-4">
+                                        <div t-att-style="'height: 18vw; 'if layout_mode == 'grid' else False" t-attf-class="o_wsale_product_grid_wrapper o_wsale_product_grid_wrapper_#{td_product['x']}_#{td_product['y']} mb-4" >
                                             <t t-call="website_sale.products_item">
-                                                <t t-set="product_image_big" t-value="td_product['x'] + td_product['y'] &gt; 2" />
+                                                <t t-set="product_image_big" t-value="td_product['x'] + td_product['y'] &gt; 2"/>
                                             </t>
                                         </div>
                                     </td>
                                 </t>
-                                <td t-else="" />
+                                <td t-else=""/>
                             </t>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </xpath>
+        </xpath> -->
 
-        <xpath expr="//div[hasclass('products_pager', 'form-inline', 'flex-md-nowrap', 'justify-content-between','justify-content-md-center')]" position="attributes">
-            <attribute name="class">border-bottom d-flex form-inline justify-content-lg-between pb-3 pt-3</attribute>
+        <xpath expr="//div[hasclass('products_pager')]" position="attributes">
+            <attribute name="class" separator=" " add="border-bottom d-flex "></attribute>
         </xpath>
         <xpath expr="//div[hasclass('js_sale')]" position="before">
             <section id="hero" class="d-flex justify-content-center" style="display: none !important;">
@@ -346,83 +382,66 @@
                 <t t-else="">
 
                     <span class="img-fluid" t-field="res_company.b2c_banner_image" t-options="{'widget': 'image'}" role="img" />
-
+  
                 </t>
-            </section> <!-- End Hero -->
+            </section><!-- End Hero -->
         </xpath>
-
-        <xpath expr="//div[hasclass('text-center', 'text-muted')]" position="replace">
-            <div class="text-center text-muted">
-                <t t-if="not search">
-                    <h3 class="mt8">No product defined</h3>
-                    <t t-set="brand_checkbox" t-value="attributes.value_ids.filtered(lambda tx: tx.display_type == 'radio')" />
-                    <t t-set="checked_data" t-value="[checked_ids for checked_ids in brand_checkbox]" />
-                    <p t-if="category">
-                        No product defined in category "
-                        <strong t-esc="category.display_name" />
-                        "
-                        <t t-if="checked_data">
-                            of
-                            <strong t-esc="', '.join([opt.name for opt in checked_data if opt.id in attrib_set])" />
-                            .
-                        </t>
-                    </p>
-                </t>
-                <t t-else="">
-                    <h3 class="mt8">No results</h3>
-                    <p>
-                        No results for "
-                        <strong t-esc='search' />
-                        "
-                        <t t-if="category">
-                            in category "
-                            <strong t-esc="category.display_name" />
-                            "
-                        </t>
-                        .
-                    </p>
-                    <a href="/shop" class="h6">Back to Shop</a>
-                </t>
-                <p t-ignore="true" groups="sales_team.group_sale_manager">
-                    Click
-                    <i>'New'</i>
-                    in the top-right corner to create your first product.
-                </p>
-            </div>
+        <xpath expr="//t[@t-if='not search']" position="replace">
+            <t t-if="not search">
+                <h3 class="mt8">No product defined</h3>
+                <t t-set="brand_checkbox" t-value="attributes.value_ids.filtered(lambda tx: tx.display_type == 'radio')"/>
+                <t t-set="checked_data" t-value="[checked_ids for checked_ids in brand_checkbox]"/>
+                <p t-if="category">No product defined in category "<strong t-esc="category.display_name"/>"<t
+                        t-if="checked_data"> of
+                    <strong t-esc="', '.join([opt.name for opt in checked_data if opt.id in attrib_set])"/>.</t></p>
+            </t>
         </xpath>
-
+        <xpath expr="//div[hasclass('text-center', 'text-muted')]//t[@t-else='']" position="replace">
+            <t t-else="">
+                <h3 class="mt8">No results</h3>
+                <p>No results for "<strong t-esc='search'/>"<t t-if="category"> in category "<strong t-esc="category.display_name"/>"</t>.</p>
+                <a href="/shop" class="h6">Back to Shop</a>
+            </t>
+        </xpath>
 
     </template>
+    <!-- NOTE: add_to_cart_inherite move to product page inh xml-->
 
 
     <template id="inherit_website_sale_product_price" inherit_id="website_sale.product_price" name="Inherit Product Price">
-        <xpath expr="//b[hasclass('oe_price')]" position="after">
-            <t t-set="old_price" t-value="0.0" />
-            <t t-set="b2b_b2c_sale_price" t-value="0.0" />
+        <!-- NOTE: need confirmation and superasiab2b_b2c module -->
+        <!-- <xpath expr="//span[hasclass('oe_price')]" position="after">
+            <t t-set="old_price" t-value="0.0"/>
+            <t t-set="b2b_b2c_sale_price" t-value="0.0"/>
             <t t-if="request.env.user.user_has_groups('base.group_public') or request.env.user.user_has_groups('superasiab2b_b2c.group_b2cuser')">
-                <t t-set="old_price" t-value="product.b2c_old_price" />
-                <t t-set="b2b_b2c_sale_price" t-value="product.b2c_pricelist_price" />
+                <t t-set="old_price" t-value="product.b2c_old_price"/>
+                <t t-set="b2b_b2c_sale_price" t-value="product.b2c_pricelist_price"/>
             </t>
             <t t-if="request.env.user.user_has_groups('superasiab2b_b2c.group_b2baccount') or request.env.user.user_has_groups('base.group_system')">
-                <t t-set="old_price" t-value="product.b2b_old_price" />
-                <t t-set="b2b_b2c_sale_price" t-value="combination_info['price']" />
+                <t t-set="old_price" t-value="product.b2b_old_price"/>
+                <t t-set="b2b_b2c_sale_price" t-value="combination_info['price']"/>
             </t>
-            <span t-attf-class="oe_default_price {{'' if old_price > 0.0 and old_price > b2b_b2c_sale_price and b2b_b2c_sale_price > 0.0 else 'd-none'}}" style="text-decoration: line-through; white-space: nowrap; font-weight: bold; color: black; padding-left: 0.5rem;" t-esc="old_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
-        </xpath>
-        <xpath expr="//h4[hasclass('oe_price_h4')]" position="inside">
-            <t t-if="request.env.user.user_has_groups('base.group_public') or request.env.user.user_has_groups('superasiab2b_b2c.group_b2cuser')">
-                <a href="/b2b_activation" class="pl-3" style="font-size: 18px; text-decoration: underline;">Login for Bulk Pricing</a>
-            </t>
+            <span t-attf-class="oe_default_price {{'' if old_price > 0.0 and old_price > b2b_b2c_sale_price and b2b_b2c_sale_price > 0.0 else 'd-none'}}"
+                  style="text-decoration: line-through; white-space: nowrap; font-weight: bold; color: black; padding-left: 0.5rem;"
+                  t-esc="old_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"
+              />
+        </xpath> -->
+        <xpath expr="//div[hasclass('product_price')]" position="after">
+            <!-- <t t-if="request.env.user.user_has_groups('base.group_public') or request.env.user.user_has_groups('superasiab2b_b2c.group_b2cuser')"> -->
+                <t t-if="request.env.user.user_has_groups('base.group_public')">
+                <a href="/b2b_activation" class="d-inline-block pl-3" style="text-decoration: underline;"><h5>Login for Bulk Pricing</h5></a>
+              </t>
         </xpath>
     </template>
-    <template id="add_to_cart_product_image_inherite" inherit_id="website_sale.shop_product_carousel" name="Add to Cart Product Image Inherit">
+    <!-- NOTE: not needed .. already implemented in base code -->
+    <!-- <template id="shop_product_carousel_image_inherite" inherit_id="website_sale.shop_product_carousel"  name="Shop Page Product Carousel Image Inherit">
         <xpath expr="//t[@t-foreach='product_images']" position="replace">
             <t t-foreach="product_images" t-as="product_image">
                 <div t-attf-class="carousel-item h-100#{' active' if product_image_first else ''} justify-content-center">
                     <div t-if="product_image._name == 'product.image' and product_image.embed_code" class="d-flex align-items-center justify-content-center h-100 embed-responsive embed-responsive-16by9">
-                        <t t-raw="product_image.embed_code" />
+                        <t t-raw="product_image.embed_code"/>
                     </div>
-                    <div t-else="" t-field="product_image.image_1920" class="d-flex align-items-center justify-content-center h-100" t-options='{"widget": "image", "preview_image": "image_1024", "class": "product_detail_img mh-100", "alt-field": "name", "zoom": product_image.can_image_1024_be_zoomed and "image_1920", "itemprop": "image"}' />
+                    <div t-else="" t-field="product_image.image_1920" class="d-flex align-items-center justify-content-center h-100" t-options='{"widget": "image", "preview_image": "image_1024", "class": "product_detail_img mh-100", "alt-field": "name", "zoom": product_image.can_image_1024_be_zoomed and "image_1920", "itemprop": "image"}'/>
                 </div>
             </t>
         </xpath>
@@ -430,140 +449,147 @@
         <xpath expr="//div[hasclass('carousel-inner','h-100')]" position="attributes">
             <attribute name="class">carousel-inner h-100 img-box</attribute>
         </xpath>
-    </template>
+    </template> -->
 
     <template id="products_attributes_inherit" name="Products Attributes Brands Inherit" inherit_id="website_sale.products_attributes">
-        <xpath expr="//button[hasclass('btn', 'btn-link', 'd-lg-none')]" position="replace">
-            <!--            <attribute name="class">btn btn-link mb-lg-n2 ml-n3 mt-3</attribute>-->
-            <button type="button" class="btn custom_them_primary mb-lg-n2 ml-n3 mt-3 text-lg-left text-white mb-sm-3 show_brands" data-target="#wsale_products_attributes_collapse" data-toggle="collapse">
+        <xpath expr="//button[@data-target='#wsale_products_attributes_collapse']" position="replace">
+<!--            <attribute name="class">btn btn-link mb-lg-n2 ml-n3 mt-3</attribute>-->
+            <button type="button" class="btn custom_them_primary w-100 mb-lg-n2 mt-3 text-lg-left text-white mb-sm-3 show_brands"
+                data-target="#wsale_products_attributes_collapse" data-toggle="collapse">
                 Show Brands
             </button>
         </xpath>
-        <xpath expr="//div[hasclass('collapse', 'd-lg-block')]" position="attributes">
+        <xpath expr="//div[@id='wsale_products_attributes_collapse']" position="attributes">
             <attribute name="class">collapse</attribute>
         </xpath>
         <xpath expr="//form[hasclass('js_attributes', 'mb-2')]" position="replace">
             <form class="js_attributes mb-2" method="get">
-                <input t-if="category" type="hidden" name="category" t-att-value="category.id" />
-                <input type="hidden" name="search" t-att-value="search" />
-                <ul class="nav nav-pills flex-column">
-                    <t t-foreach="attributes" t-as="a">
-                        <li t-if="a.value_ids and len(a.value_ids) &gt; 1" class="nav-item">
-                            <t t-if="a.display_type == 'select'">
-                                <select class="form-control" name="attrib">
-                                    <option value="" />
-                                    <t t-foreach="a.value_ids" t-as="v">
-                                        <option t-att-value="'%s-%s' % (a.id,v.id)" t-esc="v.name" t-att-selected="v.id in attrib_set" />
-                                    </t>
-                                </select>
-                            </t>
-                            <t t-if="a.display_type == 'radio'">
-                                <ul class="nav-pills flex-column ml-n4 pt-lg-3 list-unstyled">
-                                    <t t-foreach="a.value_ids" t-as="v">
-                                        <li class="nav-item">
-                                            <label t-attf-class="nav-link#{' active' if v.id in attrib_set else ''}">
-                                                <div class="row w-100">
-                                                    <div class="col-3 offset-1">
-                                                        <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None" />
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <span style="font-weight: bold" t-field="v.name" />
-                                                    </div>
-                                                </div>
-                                            </label>
-                                        </li>
-                                    </t>
-                                </ul>
-                            </t>
-                            <t t-if="a.display_type == 'color'">
-                                <t t-foreach="a.value_ids" t-as="v">
-                                    <label t-attf-style="background-color:#{v.html_color or v.name}" t-attf-class="css_attribute_color #{'active' if v.id in attrib_set else ''}">
-                                        <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None" t-att-title="v.name" />
-                                    </label>
+                    <input t-if="category" type="hidden" name="category" t-att-value="category.id" />
+                    <input type="hidden" name="search" t-att-value="search" />
+                    <ul class="nav nav-pills flex-column ml-3">
+                        <t t-foreach="attributes" t-as="a">
+                            <li t-if="a.value_ids and len(a.value_ids) &gt; 1" class="nav-item">
+                                <t t-if="a.display_type == 'select'">
+                                    <select class="form-control" name="attrib">
+                                        <option value="" />
+                                        <t t-foreach="a.value_ids" t-as="v">
+                                            <option t-att-value="'%s-%s' % (a.id,v.id)" t-esc="v.name" t-att-selected="v.id in attrib_set" />
+                                        </t>
+                                    </select>
                                 </t>
-                            </t>
-                        </li>
-                    </t>
-                </ul>
-            </form>
+                                <t t-if="a.display_type == 'radio' or a.display_type == 'pills'">
+                                    <ul class="nav-pills flex-column ml-n4 pt-lg-3 list-unstyled">
+                                        <t t-foreach="a.value_ids" t-as="v">
+                                            <li class="nav-item">
+                                                <label t-attf-class="nav-link#{' active' if v.id in attrib_set else ''}">
+                                                    <div class="row w-100">
+                                                        <div class="col-3 offset-1">
+                                                            <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None" />
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <span style="font-weight: bold" t-field="v.name" />
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </t>
+                                <t t-if="a.display_type == 'color'">
+                                    <t t-foreach="a.value_ids" t-as="v">
+                                        <label t-attf-style="background-color:#{v.html_color or v.name}" t-attf-class="css_attribute_color #{'active' if v.id in attrib_set else ''}">
+                                            <input type="checkbox" name="attrib" t-att-value="'%s-%s' % (a.id,v.id)" t-att-checked="'checked' if v.id in attrib_set else None" t-att-title="v.name" />
+                                        </label>
+                                    </t>
+                                </t>
+                            </li>
+                        </t>
+                    </ul>
+                </form>
         </xpath>
 
 
     </template>
+
     <template id="option_collapse_products_categories_inherit" name="Collapsible Category List Inherit" inherit_id="website_sale.option_collapse_products_categories">
         <xpath expr="//ul[@id='o_shop_collapse_category']" position="attributes">
-            <attribute name="class">flex-column ml-n4 mr-lg-n3 nav nav-pills</attribute>
+            <attribute name="class">d-grid ml-n4 mr-lg-n3 nav nav-pills</attribute>
         </xpath>
-
-        <xpath expr="//ul[@id='o_shop_collapse_category']/li" position="replace">
+        <xpath expr="//ul[@id='o_shop_collapse_category']//li" position="replace">
             <li class="nav-item font-weight-bold">
                 <a href="/shop" t-attf-class="nav-link #{'' if category else 'active'} o_not_editable">All Products</a>
             </li>
         </xpath>
+        <xpath expr="//ul[@id='o_shop_collapse_category']//form" position="attributes">
+            <attribute name="class" separator=" " add="d-inline-flex flex-column"></attribute>
+        </xpath>
     </template>
 
     <template id="eCommerce_categories_inherit" name="eCommerce Categories Inherit" inherit_id="website_sale.products_categories">
-        <xpath expr="//div[@id='wsale_products_categories_collapse']" position="attributes">
+        <!-- <xpath expr="//div[@id='wsale_products_categories_collapse ']" position="attributes">
             <attribute name="class">collapse show</attribute>
-        </xpath>
+        </xpath> -->
         <xpath expr="//div[@id='wsale_products_categories_collapse']" position="attributes">
-            <attribute name="class">collapse pt-2 show</attribute>
+            <attribute name="class">collapse pt-2 ml-3 show</attribute>
         </xpath>
-        <xpath expr="//button[hasclass('btn', 'btn-link', 'd-lg-none')]" position="attributes">
-            <attribute name="class">btn custom_them_primary mb-n2 ml-n3 mt-3 text-100 text-lg-left text-white show_category</attribute>
+        <xpath expr="//button[@data-target='#wsale_products_categories_collapse']" position="attributes">
+            <attribute name="class">btn custom_them_primary mb-n2 w-100 mt-3 text-100 text-lg-left text-white show_category</attribute>
+        </xpath>
+        <xpath expr="//strong[hasclass('o_categories_collapse_title')]" position="replace"/>
+    </template>
+
+    <template id="option_collapse_categories_recursive_inh" name="Collapse Category Inh" inherit_id="website_sale.option_collapse_categories_recursive">
+        <xpath expr="//t[@t-call='website_sale.categorie_link']" position="replace">
+            <a t-att-href="keep('/shop/category/' + slug(c), category=0)" t-attf-class="nav-link #{'active' if c.id == category.id else ''}">
+                <span t-field="c.name"/>
+            </a>
         </xpath>
     </template>
 
-    <template id="website_sale_product_quantity" name="website_sale_product_quantity Inherit" inherit_id="website_sale.product_quantity">
-        <xpath expr="//input[hasclass('form-control','quantity')]" position="attributes">
+    <template id="website_sale_product_quantity" name="website_sale_product_quantity Inherit"
+              inherit_id="website_sale.product_quantity">
+    <xpath expr="//input[@name='add_qty']" position="attributes">
             <attribute name="t-att-data-max">(round(combination_info['onhand_qty']) - combination_info['updated_cart_qty'])</attribute>
-
         </xpath>
-
+        
     </template>
 
-
-    <template id="website_sale_stock_product_inherit" name="website_sale_stock_product Inherit" inherit_id="website_sale_stock.website_sale_stock_product">
+    <template id="website_sale_stock_product_inherit" name="website_sale_stock_product Inherit"
+              inherit_id="website_sale_stock.website_sale_stock_product">
         <xpath expr="//div[hasclass('availability_messages', 'o_not_editable')]" position="attributes">
             <attribute name="class">availability_messages o_not_editable d-none</attribute>
         </xpath>
     </template>
 
-    <template id="website_sale_products_search_box_inherit" name="website_sale_products_search_box Inherit" inherit_id="website_sale.website_sale_products_search_box">
-        <xpath expr="//form//div" position="after">
-            <br />
-            <span style="font-size: calc(15px + 0.6vw); color:gray;">FILTERS</span>
-        </xpath>
-
-    </template>
-
-    <!-- Login Page button color changes-->
- <template id="login_inherit" name="website login Inherit" inherit_id="web.login">
-        <xpath expr="//button[hasclass('btn', 'btn-primary', 'btn-block')]" position="attributes">
-            <attribute name="class">btn btn-block custom_them_primary font-weight-bold text-white</attribute>
-        </xpath>
-    </template>
-    <template id="reset_login_inherit" name="website Reset login Inherit" inherit_id="auth_signup.login">
-        <xpath expr="//div[hasclass('justify-content-between', 'mt-2', 'd-flex', 'small')]" position="replace">
-            <div class="pull-right mt-2 d-flex small">
-                <a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}" style="color:#ac1520">Don't have an account?</a>
-                <a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}" style="color:#ac1520">Reset Password</a>
-            </div>
-        </xpath>
-    </template>
-    <!-- Login Page button color changes-->
-
-    <template id="sale_order_portal_content_inherit" name="sale_order_portal_content Inherit" inherit_id="sale_stock.sale_order_portal_content_inherit_sale_stock">
-        <xpath expr="//div[hasclass('d-flex', 'flex-wrap', 'align-items-center', 'justify-content-between', 'o_sale_stock_picking')]//div//a" position="replace">
-            <a href="#">
-                <span t-esc="i.name" />
-            </a>
-        </xpath>
-    </template>
-    <template id="portal_record_sidebar_inherit" name="portal_record_sidebar Inherit" inherit_id="portal.portal_record_sidebar">
-        <xpath expr="//img[contains(@height, '15')]" position="replace">
-            <img src="/bista_superasia_theme/static/src/img/super-asia-logo.png" alt="Odoo Logo" height="15" />
-        </xpath>
-    </template>
+        <!-- Login Page button color changes-->
+        <template id="login_inherit" name="website login Inherit" inherit_id="web.login">
+            <xpath expr="//button[hasclass('btn', 'btn-primary', 'btn-block')]" position="attributes">
+                <attribute name="class">btn btn-block custom_them_primary font-weight-bold text-white</attribute>
+            </xpath>
+        </template>
+        <template id="reset_login_inherit" name="website Reset login Inherit" inherit_id="auth_signup.login">
+            <xpath expr="//div[hasclass('justify-content-between', 'mt-2', 'd-flex', 'small')]" position="replace">
+                <div class="pull-right mt-2 d-flex small">
+                        <a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}" style="color:#ac1520">Don't have an account?</a>
+                        <a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}" style="color:#ac1520">Reset Password</a>
+                </div>
+            </xpath>
+        </template>
+        <!-- Login Page button color changes-->
+    
+        <template id="sale_order_portal_content_inherit" name="sale_order_portal_content Inherit"
+                  inherit_id="sale_stock.sale_order_portal_content_inherit_sale_stock">
+            <xpath
+                    expr="//div[hasclass('d-flex', 'flex-wrap', 'align-items-center', 'justify-content-between', 'o_sale_stock_picking')]//div//a" position="replace">
+                <a href="#">
+                    <span t-esc="i.name"/>
+                </a>
+            </xpath>
+        </template>
+        <template id="portal_record_sidebar_inherit" name="portal_record_sidebar Inherit" inherit_id="portal.portal_record_sidebar">
+            <xpath expr="//img[contains(@height, '15')]" position="replace">
+                <img src="/bista_superasia_theme/static/src/img/super-asia-logo.png" alt="Supera Asia Logo" height="15"/>
+            </xpath>
+        </template>
 
 </odoo>

@@ -262,6 +262,8 @@ background-color:cyan;
 
 .o_wsale_products_searchbar_form {
   width: 16rem !important;
+  margin-left: 5px;
+  margin-top: 3px;
 }
 
 .nav-pills .nav-link {
@@ -2717,8 +2719,6 @@ body[data-aos-duration="400"] [data-aos] {
 
 
 
-
-
   #products_grid .o_wsale_products_grid_table_wrapper>.table .o_wsale_product_grid_wrapper {
     display: flex;
     padding-top: 20% !important;
@@ -2746,9 +2746,9 @@ body[data-aos-duration="400"] [data-aos] {
   }
 
   /*#products_grid .o_wsale_products_grid_table_wrapper > .table .o_wsale_product_grid_wrapper > *{*/
-  .o_wsale_product_grid_wrapper>* {
+.o_wsale_product_grid_wrapper>* {
     flex-flow: row;
-    background: orange;
+    /* background: orange; */
   }
 
   .oe_product_cart .oe_product_image {
@@ -3601,4 +3601,45 @@ button.o_add_compare {
 
 #product_details div.product_price {
   margin-bottom: 15px;
+}
+
+.show_category, .show_brand {
+  font-size:1rem;
+}
+
+.btn {
+  font-size: 1rem;
+}
+
+form.s_searchbar_input div[role=search] {
+  width: fit-content;
+}
+
+.o_wsale_apply_layout label.active {
+  background-color: #BE222B !important;
+  color: #fff !important;
+}
+
+ul.pagination {
+  border-radius: 0.25rem;
+}
+
+ul.pagination a.page-link {
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+.oe_product .product_price {
+  color: #ac1520;
+}
+/* .oe_product_cart form.oe_product_cart {
+  background-color: #fff;
+} */
+.o_wsale_products_main_row {
+  margin-bottom: 25px !important;
+}
+
+.dynamic_product_qty .custom_js_quantity {
+  max-width: none !important;
 }

@@ -69,5 +69,6 @@ class ProductTemplate(models.Model):
                 'onhand_qty': int(onhand_qty),
                 'avail_qty':int(product.qty_available),
                 'updated_cart_qty':int(product.cart_qty),
+                'product_uom': product.uom_id.name,
             })
         return combination_info

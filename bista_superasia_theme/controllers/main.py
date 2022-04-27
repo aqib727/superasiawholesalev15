@@ -138,6 +138,12 @@ class WebsiteSale(ws):
     #     if category:
     #         domain += [('public_categ_ids', 'child_of', int(category))]
     #     return domain
+    @http.route([])
+    def shop(self, page=0, category=None, search='', min_price=0.0, max_price=0.0, ppg=False, **post):
+        request.env['website'].sudo().get_current_website().shop_ppr = 6
+        res = super(WebsiteSale, self).shop(page=page, category=category, search=search,
+        min_price=min_price, max_price=max_price, ppg=50, **post)
+        return res
 
     # @http.route([
     #     '''/shop''',
