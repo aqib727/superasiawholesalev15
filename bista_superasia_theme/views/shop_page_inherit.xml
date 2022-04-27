@@ -586,10 +586,6 @@
                 </a>
             </xpath>
         </template>
-        <template id="portal_record_sidebar_inherit" name="portal_record_sidebar Inherit" inherit_id="portal.portal_record_sidebar">
-            <xpath expr="//img[contains(@height, '15')]" position="replace">
-                <img src="/bista_superasia_theme/static/src/img/super-asia-logo.png" alt="Supera Asia Logo" height="15"/>
-            </xpath>
-        </template>
+
 
 </odoo>

@@ -21,7 +21,7 @@
         'views/product_page_inh.xml',
         # 'views/cart_page_inherit.xml',
         # 'views/contact_us_template_inherit.xml',
-        # 'views/portal_template.xml',
+        'views/portal_template.xml',
         'views/company.xml',
         # 'views/gta_code.xml',
         # 'views/delivery_carrier.xml',

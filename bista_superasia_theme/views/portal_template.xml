@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template inherit_id="portal.portal_record_sidebar" id="bista_portal_record_sidebar">
+    <!-- <template inherit_id="portal.portal_record_sidebar" id="bista_portal_record_sidebar">
+        <xpath expr="//div[hasclass('card-footer')]" position="replace">
+            <div class="card-footer small text-center text-muted border-top-0 pt-1 pb-1 d-none d-lg-block">
+                Powered by <a target="_blank" href="/" title="Super Asia Foods"><img t-att-src="'/logo.png?company=%s' % res_company.id" alt="Super Asia Foods" height="15"/></a>
+            </div>
+        </xpath>
+    </template> -->
+    <template id="portal_record_sidebar_inherit" name="portal_record_sidebar Inherit" inherit_id="portal.portal_record_sidebar">
+        <!-- <xpath expr="//img[contains(@height, '15')]" position="replace">
+            <img src="/bista_superasia_theme/static/src/img/super-asia-logo.png" alt="Supera Asia Logo" height="15"/>
+        </xpath> -->
         <xpath expr="//div[hasclass('card-footer')]" position="replace">
             <div class="card-footer small text-center text-muted border-top-0 pt-1 pb-1 d-none d-lg-block">
                 Powered by <a target="_blank" href="/" title="Super Asia Foods"><img t-att-src="'/logo.png?company=%s' % res_company.id" alt="Super Asia Foods" height="15"/></a>
