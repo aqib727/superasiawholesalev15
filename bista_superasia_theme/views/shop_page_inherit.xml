@@ -3,7 +3,7 @@
     <!-- Inherited template from base -->
     <template id="product_grid_or_list_option_inherite" inherit_id="website_sale.add_grid_or_list_option" name="Grid or List button inherit">
         <xpath expr="//div[hasclass('o_wsale_apply_layout')]" position="replace">
-            <div class="col-4 text-md-right">
+            <div class="col-12 col-md-4 pl-0 text-md-right">
                 <div class="col-md-12 mb-2">
                     <t t-set="list_price_asc_label">Price - Low to High</t>
                     <t t-set="list_price_desc_label">Price - High to Low</t>
@@ -37,7 +37,7 @@
                                 </a>
                             </t>
                         </div>
-                        <!-- <div id="apply_filter_mobile" t-if="category or attrib_values">
+                        <div id="apply_filter_mobile" t-if="category or attrib_values">
                             <table class="table table-borderless mb-0" t-if="category or attrib_values">
                                 <tbody>
                                     <tr t-if="category">
@@ -94,7 +94,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div> -->
+                        </div>
 
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                 </div>
 
                 <!-- Modal -->
-                <!-- <div class="modal fade" id="apply_filter_mobile_modal" tabindex="-1" role="dialog" aria-labelledby="apply_filter_mobile_modalLabel" aria-hidden="true">
+                <div class="modal fade" id="apply_filter_mobile_modal" tabindex="-1" role="dialog" aria-labelledby="apply_filter_mobile_modalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -169,7 +169,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </xpath>
 
@@ -186,7 +186,7 @@
     <template id="product_shortby_dropdown_inherite" name="Sor template Inh" inherit_id="website_sale.sort">
         <xpath expr="//div[hasclass('o_sortby_dropdown')]" position="before">
             <t t-call="website.pager">
-                <t t-set="_classes">col-12 col-md-4 justify-content-between mt-2 ml-md-2</t>
+                <t t-set="_classes">col-12 col-md-4 justify-content-center mt-2 ml-md-2</t>
             </t>
         </xpath>
         <xpath expr="//div[hasclass('o_sortby_dropdown')]" position="attributes">

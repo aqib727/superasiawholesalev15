@@ -1852,8 +1852,9 @@ li.active {
     text-transform: uppercase !important;
   }
 
-  .dropdown-item.cate.active {
+  .dropdown-item.cate.active,.responsive_dynamic_menu .form-check.active {
     background-color: #BE222B !important;
+    color: #ffffff;
   }
 
   .whatsappapi__button {
