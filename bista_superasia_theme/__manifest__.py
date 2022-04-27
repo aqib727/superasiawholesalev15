@@ -20,14 +20,14 @@
         'views/shop_page_inherit.xml',
         'views/product_page_inh.xml',
         # 'views/cart_page_inherit.xml',
-        # 'views/contact_us_template_inherit.xml',
+        'views/contact_us_template_inherit.xml',
         'views/portal_template.xml',
         'views/company.xml',
-        # 'views/gta_code.xml',
-        # 'views/delivery_carrier.xml',
-        # 'views/check_postal_code.xml',
+        # 'views/gta_code.xml', # NOTE: gta code related
+        # 'views/delivery_carrier.xml', # NOTE: gta code related
+        # 'views/check_postal_code.xml', # NOTE: gta code related
         'views/product_template.xml',
-        # 'views/sale_order.xml',
+        # 'views/sale_order.xml', # b2b related
         'data/data.xml', # NOTE: From website_extension module
         'views/brands_page.xml', # NOTE: From website_extension module
         #'views/pricelist_view.xml', # NOTE: From website_extension module
