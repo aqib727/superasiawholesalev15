@@ -126,6 +126,12 @@ class WebsiteSale(ws):
 
     #     return 'priority_sequence ASC, is_published desc, %s, id desc' % order
 
+    def _get_search_order(self, post):
+        # OrderBy will be parsed in orm and so no direct sql injection
+        # id is added to be sure that order is a unique sort key
+        order = post.get('order') or 'website_sequence ASC'
+        return 'priority_sequence ASC, is_published desc, %s, id desc' % order
+
     def _get_search_domain_new(self, search, category):
         domain = request.website.sale_product_domain()
         if search:
@@ -564,7 +570,7 @@ class WebsiteSale(ws):
         return res
     
 
-    @http.route(['/shop/product/<model("product.template"):product>'], type='http', auth="public", website=True)
+    @http.route(['/shop/<model("product.template"):product>'], type='http', auth="public", website=True, sitemap=True)
     def product(self, product, category='', search='', **kwargs):
         res = super(WebsiteSale, self).product(product, category, search, **kwargs)
         if res.qcontext.get('categories'):
