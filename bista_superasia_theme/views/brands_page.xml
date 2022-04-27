@@ -52,7 +52,7 @@
 											<div class="p-0 text-center">
 												<div class="p-2 o_wsale_product_information_text">
 													<div class="mt-1">
-														<a role="button" class="btn btn-cart mb-2 text-center text-uppercase text-white add_to_crt"
+														<a role="button" class="btn btn-cart mb-2 text-center text-uppercase text-white quick_add_to_cart"
 														   t-att-href="'/shop?search=&amp;attrib=' + str(brand.attribute_id.id) + '-' + str(brand.id)"
 														   style="padding: 2% 5%; font-size: 1rem;">
 															<t t-esc="brand.name"/>
