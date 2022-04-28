@@ -11,16 +11,15 @@ class ProductTemplate(models.Model):
     is_featured_product = fields.Boolean(string="Feature Product?",
                                          help="Check true if you want this product to be in Featured Products on E-commerce homepage.")
 
-    # TODO: Will enable priority_sequence after confirmation
-    # priority_sequence = fields.Integer('Website View Sequence', default=500,
-    #                      help="Determine the display order in the Website E-commerce Shop Page \n Lowest value(1,2,3,4...) will show in top")
+    priority_sequence = fields.Integer('Website View Sequence', default=500,
+                         help="Determine the display order in the Website E-commerce Shop Page \n Lowest value(1,2,3,4...) will show in top")
 
-    # def _default_priority_sequence(self):
-    #     self._cr.execute("SELECT MAX(priority_sequence) FROM %s" % self._table)
-    #     max_sequence = self._cr.fetchone()[0]
-    #     if max_sequence is None:
-    #         return 500
-    #     return max_sequence
+    def _default_priority_sequence(self):
+        self._cr.execute("SELECT MAX(priority_sequence) FROM %s" % self._table)
+        max_sequence = self._cr.fetchone()[0]
+        if max_sequence is None:
+            return 500
+        return max_sequence
 
     def featured_products_domain(self):
         return [('is_featured_product', '=', True)]
@@ -69,5 +68,6 @@ class ProductTemplate(models.Model):
                 'onhand_qty': int(onhand_qty),
                 'avail_qty':int(product.qty_available),
                 'updated_cart_qty':int(product.cart_qty),
+                'product_uom': product.uom_id.name,
             })
         return combination_info

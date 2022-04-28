@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- TODO: website_form module not exist in odoo 15 -->
-    <template id="contactus_form_inherite" inherit_id="website_form.contactus_form" name="Contactus_form Inherit">
-        <xpath expr="//a[hasclass('btn', 'btn-primary', 'btn-lg', 'o_website_form_send')]" position="attributes">
-            <attribute name="class">btn custom_them_primary o_website_form_send text-white</attribute>
+    <template id="contactus_form_inherite" inherit_id="website.contactus" name="Contactus_form Inherit">
+        <xpath expr="//a[hasclass('btn', 'btn-primary', 'btn-lg', 's_website_form_send')]" position="attributes">
+            <attribute name="class">btn custom_them_primary s_website_form_send text-white</attribute>
         </xpath>
     </template>
     <template id="multi_company_description" name="Company Description">
@@ -27,7 +27,7 @@
         <xpath expr="//section[hasclass('s_text_block')]" position="attributes">
             <attribute name="class">s_text_block p-0</attribute>
         </xpath>
-        <xpath expr="//t[@t-call='website.company_description']" position="replace">
+        <xpath expr="//ul[hasclass('list-unstyled', 'mb-0', 'pl-2')]" position="replace">
             <t t-set="companies" t-value="request.env['res.company'].sudo().search([])" />
             <t t-foreach="companies" t-as="company">
                 <t t-call="bista_superasia_theme.multi_company_description">

@@ -8,7 +8,7 @@ odoo.define("bista_superasia_theme.feature_products", function (require) {
   publicWidget.registry.websiteFeatureProducts = publicWidget.Widget.extend(VariantMixin,{
       selector: ".featured_products",
       events: _.extend({}, VariantMixin.events || {}, {
-        "click .add_to_crt": "_onAddProduct",
+        "click .quick_add_to_cart": "_onAddProduct",
         "click a.js_add_cart_json": "_onClickAddCartJSON",
         "mouseup form.js_add_cart_json label": "_onMouseupAddCartLabel",
         "touchend form.js_add_cart_json label": "_onMouseupAddCartLabel",

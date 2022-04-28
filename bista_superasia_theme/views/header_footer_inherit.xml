@@ -138,7 +138,7 @@
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Categories
                                 </a>
-                                    <div class="dropdown-menu submenu_list_slide" style="left:-2 !important">
+                                    <div class="dropdown-menu submenu_list_slide" style="height:100vh;left:-2px !important;">
                                         <t t-if="public_categories">
                                             <div class="sticky_div"
                                                  style="background:white; color:black; font-weight:bold; padding:10px 20px !important; font-size:large; position:sticky; top:0; z-index:1020;"><i class="far fa-arrow-alt-circle-left"/> Back
@@ -177,7 +177,7 @@
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Brands
                                 </a>
-                                    <div class="dropdown-menu submenu_list_slide">
+                                    <div class="dropdown-menu submenu_list_slide" style="height:100vh;">
                                         <t t-if="attributes">
                                             <form class="js_attributes mb-2" method="get">
                                                 <input t-if="current_category" type="hidden" name="category" t-att-value="current_category.id" />
@@ -186,8 +186,10 @@
                                                      style="background:white; color:black; font-weight:bold; padding:10px 20px !important; font-size:large; position:sticky; top:0; z-index:1020;"><i class="far fa-arrow-alt-circle-left"/> Back
                                                 </div>
                                             <div class="dropdown-divider"></div>
-                                                <t t-foreach="attributes" t-as="a">
-                                                    <t t-if="a.display_type == 'radio'">
+                                                
+                                            	<t t-set="brands_attributes" t-value="attributes.filtered(lambda attr: 'brand' in attr.name.lower())"/>
+                                                <t t-foreach="brands_attributes" t-as="a">
+                                                    <t t-if="a.display_type == 'radio' or a.display_type == 'pills'">
                                                         <t t-foreach="a.value_ids" t-as="v">
                                                             <div class="form-check cate"
                                                                  t-attf-class="form-check#{' active' if v.id in attrib_set else ''}" style="padding-left: 3rem !important;color: #e3f0fc !important;font-weight: 500;padding: 12px 48px !important;">
@@ -529,7 +531,7 @@
                 data-name="superasia_custom_header"
                 data-customize-website-views="bista_superasia_theme.superasia_custom_header"
                 data-customize-website-variable="'superasia_custom_header'"
-                data-img="/bista_superasia_theme/static/src/img/header-option-1.svg"/>
+                data-img="/bista_superasia_theme/static/src/img/header-option-6.svg"/>
         </xpath>
     </template>
 </odoo>
