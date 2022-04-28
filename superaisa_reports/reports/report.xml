@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- <report
+            id="report_frozen_picking"
+            model="stock.picking"
+            string="Picking Operations (Frozen)"
+            report_type="qweb-pdf"
+            name="superaisa_reports.frozen_picking_operations"
+            file="superaisa_reports.frozen_picking_operations"
+            print_report_name="'Frozen Picking Operations - %s - %s' % (object.partner_id.name or '', object.name)"
+            /> -->
+
+<record id="report_frozen_picking_ids" model="ir.actions.report">
+            <field name="name">Picking Operations (Frozen)</field>
+            <field name="model">stock.picking</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="report_type">qweb-pdf</field>
+    <field name="report_name">superaisa_reports.frozen_picking_operations</field>
+    <field name="report_file">superaisa_reports.frozen_picking_operations</field>
+            <field name="attachment">'Frozen Picking Operations.pdf'</field>
+            <field name="attachment_use">True</field>
+            <field name="binding_view_types">list</field>
+        </record>
+
+
+</odoo>
+
+
