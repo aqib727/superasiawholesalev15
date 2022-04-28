@@ -19,7 +19,7 @@
         'views/header_footer_inherit.xml',
         'views/shop_page_inherit.xml',
         'views/product_page_inh.xml',
-        # 'views/cart_page_inherit.xml',
+        'views/cart_page_inherit.xml',
         'views/contact_us_template_inherit.xml',
         'views/portal_template.xml',
         'views/company.xml',
@@ -46,7 +46,7 @@
             'bista_superasia_theme/static/src/vendor/animate.css/animate.min.css',
             'bista_superasia_theme/static/src/vendor/venobox/venobox.css',
             'bista_superasia_theme/static/src/vendor/aos/aos.css',
-            'bista_superasia_theme/static/src/scss/style.css',
+            'bista_superasia_theme/static/src/scss/style.scss',
             
             'bista_superasia_theme/static/src/js/typed.min.js',
             # 'bista_superasia_theme/static/src/vendor/jquery-sticky/jquery.sticky.js',
