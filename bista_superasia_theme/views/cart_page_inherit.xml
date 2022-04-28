@@ -499,7 +499,8 @@
     </template>
     -->
     <template id="bista_adress_inherit"  inherit_id="website_sale.address">
-        <xpath expr="//input[@name='field_required']" position="after">
+        <!-- TODO: need superasiab2b_b2c module for  recaptcha_key_site-->
+        <!-- <xpath expr="//input[@name='field_required']" position="after">
             <div class="form-row">
                 <div class="value">
                     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -518,7 +519,7 @@
                     </div>
                 </div>
             </div>
-        </xpath>
+        </xpath> -->
     </template>
 
 </odoo>
