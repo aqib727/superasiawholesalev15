@@ -127,7 +127,8 @@
             <attribute name="class" separator=" " add="font-weight-bold"></attribute>
         </xpath>
 
-        <xpath expr="//tr[@id='order_total_untaxed']" position="before">
+        <!-- NOTE: Delivery row already done in website_sale_delivery module -->
+        <!-- <xpath expr="//tr[@id='order_total_untaxed']" position="before">
             <tr id="order_delivery" t-if="website_sale_order and website_sale_order.carrier_id">
               <td class="text-right border-0 text-secondary font-weight-bold"  title="Delivery will be updated after choosing a new delivery method">Delivery:</td>
               <td class="text-xl-right border-0" >
@@ -137,7 +138,7 @@
                   }'/>
               </td>
             </tr>
-        </xpath>
+        </xpath> -->
 
         <!-- <xpath expr="//div[@id='cart_total']" position="replace">
             <div id="cart_total" t-att-class="extra_class or ''" t-if="website_sale_order and website_sale_order.website_order_line">
@@ -206,10 +207,10 @@
         <xpath expr="//a[hasclass('btn', 'btn-primary', 'mb32')]" position="attributes">
             <attribute name="class">btn mb32 custom_them_primary text-white</attribute>
         </xpath>
-        <!-- TODO: path not found -->
-        <!-- <xpath expr="//a[hasclass('a-submit', 'btn', 'btn-secondary', 'mb16', 'btn-block')]" position="attributes">
-            <attribute name="class">a-submit btn mb16 btn-block custom_them_primary text-white</attribute>
-        </xpath> -->
+
+        <xpath expr="//a[hasclass('a-submit', 'btn', 'btn-secondary', 'mb-2', 'btn-block')]" position="attributes">
+            <attribute name="class">a-submit btn mb-2 btn-block custom_them_primary text-white</attribute>
+        </xpath>
         <xpath expr="//div[hasclass('col-12', 'col-xl-auto', 'order-xl-2', 'd-none', 'd-xl-block')]" position="attributes">
             <attribute name="class">col-12 col-xl-5 d-none d-xl-block offset-xl-2 order-xl-2</attribute>
         </xpath>
@@ -239,6 +240,9 @@
         <xpath expr="//div[hasclass('col-12', 'col-xl', 'order-xl-1', 'oe_cart')]" position="attributes">
             <attribute name="class">col-12 col-xl-5 order-xl-1 oe_cart address_pg</attribute>
         </xpath>
+        <xpath expr="//a[hasclass('btn', 'btn-secondary', 'mb32')]" position="attributes">
+            <attribute name="class" separator=" " add="custom_them_primary text-white"/>
+        </xpath>
         <xpath expr="//a[hasclass('btn', 'btn-primary', 'mb32', 'a-submit', 'a-submit-disable', 'a-submit-loading')]" position="attributes">
             <attribute name="class">a-submit a-submit-disable a-submit-loading btn custom_them_primary mb32 text-white</attribute>
         </xpath>
@@ -250,10 +254,19 @@
         </xpath>
 
     </template>
+    <template id="bista_address_kanban" inherit_id="website_sale.address_kanban" name="Address Kanban Inherit">
+        <xpath expr="//a[hasclass('btn', 'btn-block', 'btn-secondary')]" position="attributes">
+            <attribute name="class" separator=" "  value="custom_them_primary text-white"/>
+        </xpath>
+    </template>
     <template id="payment_inherite" inherit_id="website_sale.payment" name="Payment Inherit">
         <xpath expr="//div[hasclass('col-12', 'col-xl-auto', 'order-xl-2')]" position="attributes">
             <attribute name="class">col-12 col-xl-5 order-xl-1 oe_cart</attribute>
         </xpath>
+        <xpath expr="//div[hasclass('col-12', 'col-xl', 'order-xl-1', 'oe_cart')]" position="attributes">
+            <attribute name="class">col-12 col-xl-5 offset-xl-2 order-xl-1 oe_cart confirm_pg</attribute>
+        </xpath>
+
         <!-- NOTE: need confirmation of superasiab2b_b2c-->
         <!-- <xpath expr="//div[hasclass('col-12', 'col-xl', 'order-xl-1', 'oe_cart')]" position="replace">
             <t t-if="request.env.user.has_group('superasiab2b_b2c.group_b2baccount')">
@@ -285,6 +298,7 @@
             <t t-else="">
                 <div class="col-12 col-xl-5 offset-xl-2 order-xl-1 oe_cart confirm_pg">
                     <div class="card">
+                        NOTE: shipping_and_billing div moved to bista_address_on_payment template
                         <div class="card-body b2c_all" id="shipping_and_billing">
                             <a class='float-right no-decoration' href='/shop/checkout'><i class="fa fa-edit"/> Click here</a>
                             <t t-set="same_shipping" t-value="bool(order.partner_shipping_id==order.partner_id or only_services)" />
@@ -334,12 +348,57 @@
                 </div>
             </t>
         </xpath> -->
+        <!-- NOTE: below code comming from bista_superasia_theme_payment_delivery template-->
+        <xpath expr="//div[@id='payment_method']" position="before">
+            <div t-if="deliveries" id="delivery_carrier">
+                <t t-set="delivery_nb" t-value="len(deliveries)"/>
+                <h3 t-if="delivery_nb &gt; 1" class="mb24">Choose a delivery method</h3>
+                <div t-if="delivery_nb &gt; 1" class="card border-0" id="delivery_method">
+                    <ul class="list-group">
+                    <t t-foreach="deliveries" t-as="delivery">
+                        <li class="list-group-item o_delivery_carrier_select">
+                            <t t-call="website_sale_delivery.payment_delivery_methods"/>
+                        </li>
+                    </t>
+                    </ul>
+                </div>
+            </div>
+        </xpath>
+        COMMENT: we shouldn't be able to pay if there is no way to deliver
+        <xpath expr="//div[@id='payment_method']" position="attributes">
+                <attribute name="t-att-style">'display: none!important' if not deliveries and delivery_has_storable else ''</attribute>
+        </xpath>
+        <!-- END -->
 
     </template>
+    <template id="bista_address_on_payment" name="Modify Address on Payment" inherit_id="website_sale.address_on_payment">
+        <xpath expr="//div[@id='shipping_and_billing']" position="replace">
+            <div class="card-body b2c_all" id="shipping_and_billing">
+                <a class='float-right no-decoration' href='/shop/checkout'><i class="fa fa-edit"/> Click here</a>
+                <t t-set="same_shipping" t-value="bool(order.partner_shipping_id==order.partner_id or only_services)" />
+                <div><h4><span>Add Billing<t t-if="same_shipping and not only_services"> &amp; Shipping</t> Address: </span></h4><span t-esc='order.partner_id' t-options="dict(widget='contact', fields=['address'], no_marker=True, separator=', ')" class="address-inline"/></div>
+                <div t-if="not same_shipping and not only_services" groups="sale.group_delivery_invoice_address"><h4><span>Shipping Address: </span></h4><span t-esc='order.partner_shipping_id' t-options="dict(widget='contact', fields=['address'], no_marker=True, separator=', ')"  class="address-inline"/></div>
+                <!-- NOTE: below code comming from bista_superasia_theme_payment_delivery template-->
+                <t t-set="delivery_nb" t-value="deliveries and len(deliveries)"/>
+                <div t-if="delivery_nb == 1" id="delivery_carrier" class="mt4">
+                    <b>Shipping Method: </b>
+                    <t t-foreach="deliveries" t-as="delivery">
+                            <t t-call="website_sale_delivery.payment_delivery_methods"/>
+                    </t>
+                </div>
+                <!-- END -->
+            </div>
+        </xpath>
+    </template>
 
+    <template id="bista_payment_footer" name="Payment Footer Modify"
+              inherit_id="website_sale.payment_footer">
+        <xpath expr="//button[@name='o_payment_submit_button']" position="attributes">
+            <attribute name="class" separator=" " add="custom_them_primary text-white"/>
+        </xpath>
 
-
-    <!-- TODO: Merge this template with payment_inherite template-->
+    </template>
+    <!-- NOTE: Merged this template with payment_inherite and bista_payment_footer template-->
     <!-- <template id="bista_superasia_theme_payment_delivery" name="Delivery Costs"
               inherit_id="bista_superasia_theme.payment_inherite">
         <xpath expr="//div[hasclass('card-body','b2c_all')]" position="inside">
@@ -373,8 +432,8 @@
     </template> -->
     
 
-    <!-- TODO: Need to fix payment_tokens_list" id not found issue -->
-    <!-- <template id="payment_tokens_list_inherite" inherit_id="payment.payment_tokens_list" name="Payment Inherit">
+
+    <template id="payment_tokens_list_inherite" inherit_id="payment.checkout" name="Payment Inherit">
         <xpath expr="//div[hasclass('card')]" position="after">
             <div class="Extra comments pt-3">
                 <div class="form-group">
@@ -384,7 +443,7 @@
                 </div>
             </div>
         </xpath>
-    </template> -->
+    </template>
     <template id="confirmation_inherite" inherit_id="website_sale.confirmation" name="Confirmation Inherit">
 <!--        <xpath expr="//div[hasclass('col-12', 'col-xl')]" position="attributes">-->
 <!--            <attribute name="class">col-12 col-xl-5</attribute>-->
@@ -488,7 +547,7 @@
             </t>
         </xpath>
     </template>
-
+    NOTE: need superasiab2b_b2c module confirmation
     <template id="sale_order_portal_template_inherit" inherit_id="sale.sale_order_portal_template">
         <xpath expr="//a[hasclass('btn', 'btn-primary', 'btn-block', 'mb8')]" position="attributes">
             <attribute name="t-att-class">'d-none' if request.env.user.has_group('superasiab2b_b2c.group_b2baccount') else 'btn btn-block custom_them_primary mb8 text-white'</attribute>
@@ -499,7 +558,7 @@
     </template>
     -->
     <template id="bista_adress_inherit"  inherit_id="website_sale.address">
-        <!-- TODO: need superasiab2b_b2c module for  recaptcha_key_site-->
+        <!-- NOTE: need superasiab2b_b2c module for  recaptcha_key_site-->
         <!-- <xpath expr="//input[@name='field_required']" position="after">
             <div class="form-row">
                 <div class="value">

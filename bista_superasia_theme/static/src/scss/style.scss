@@ -2,6 +2,12 @@ body {
   overflow-x: hidden;
 }
 
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
 #mobile_div,
 .nav-menu {
   display: none;
@@ -453,7 +459,7 @@ background-color:cyan;
 
 #o_payment_form_pay,
 .custom_them_primary {
-  background-color: #BE222B;
+  background-color: #BE222B !important;
   color: white;
 }
 
@@ -3684,4 +3690,10 @@ table#cart_products {
     color: #ac1520;
   }
   
+}
+
+#address_on_payment {
+  h4 {
+    color: #ac1520;
+  }
 }
