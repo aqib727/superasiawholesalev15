@@ -4,4 +4,5 @@ from . import product_attribute # NOTE: from website_extension
 # from . import delivery_carrier
 # from . import purchase_order
 from . import product_template
-# from . import sale_order
+# from . import sale_order # NOTE: b2b related
+
