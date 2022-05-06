@@ -384,6 +384,24 @@ class WebsiteSale(ws):
     #     return request.render("website_sale.products", values)
 
 
+    
+    @http.route('/shop/payment/validate', type='http', auth="public", website=True, sitemap=False)
+    def shop_payment_validate(self, transaction_id=None, sale_order_id=None, **post):
+        """ Over Ride
+            Save comment data in sale order
+        """
+        if sale_order_id is None:
+            order = request.website.sale_get_order()
+        else:
+            order = request.env['sale.order'].sudo().browse(sale_order_id)
+            assert order.id == request.session.get('sale_last_order_id')
+        comments = post.get('comments')
+
+        # _logger.info('========comments=========== %s' % comments)
+        order.write({'note':comments})
+        res = super(WebsiteSale, self).shop_payment_validate(transaction_id=transaction_id, sale_order_id=sale_order_id, **post)
+        return res
+
 
     # @http.route('/shop/payment/validate', type='http', auth="public", website=True, sitemap=False)
     # def payment_validate(self, transaction_id=None, sale_order_id=None, **post):
@@ -403,10 +421,10 @@ class WebsiteSale(ws):
     #     b2bid = request.env['ir.model.data'].get_object('superasiab2b_b2c','group_b2baccount')
     #     group_list = [b2bid.id]
 
-    #     comments = post.get('comments')
+        # comments = post.get('comments')
 
-    #     _logger.info('========comments=========== %s' % comments)
-    #     order.write({'note':comments})  
+        # # _logger.info('========comments=========== %s' % comments)
+        # order.write({'note':comments})  
 
     #     user_data=user_obj.search([('id','=',request.uid),('groups_id','in',group_list)])
     #     if user_data:
